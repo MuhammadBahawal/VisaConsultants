@@ -1001,3 +1001,191 @@ a {
     max-width: 100%;
   }
 }
+
+/* ===== Responsive Nav & Global refinements ===== */
+
+/* make layout containers truly fluid */
+.container, .hero-container, .visa-section, .visa-services, .container-testimonials, .coaching-container, .blog-container, #achievement-section {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* NAV - mobile toggle */
+.nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: 8px;
+}
+
+.nav-toggle .hamburger,
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    position: relative;
+}
+
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+}
+
+.nav-toggle .hamburger::before { top: -8px; }
+.nav-toggle .hamburger::after { top: 8px; }
+
+/* small screens: collapse nav links to a vertical menu */
+@media (max-width: 992px) {
+
+  .navbar {
+    padding: 0.6rem 0.8rem;
+    gap: 12px;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 72px;
+    right: 16px;
+    background: rgba(12,22,50,0.98);
+    backdrop-filter: blur(6px);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    width: calc(100% - 32px);
+    max-width: 320px;
+    padding: 14px;
+    border-radius: 10px;
+    display: none;
+    z-index: 2000;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.45);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links li {
+    width: 100%;
+    margin: 6px 0;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 10px 12px;
+    width: 100%;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .apply-now-btn {
+    display: none; /* move CTA into menu for small devices */
+  }
+}
+
+/* very small screens: full width menu */
+@media (max-width: 480px) {
+  .nav-links {
+    right: 0;
+    left: 0;
+    top: 64px;
+    width: 100%;
+    border-radius: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero {
+    padding: 40px 4%;
+  }
+}
+
+/* Fluid typography for better scaling */
+:root {
+  --type-base: 16px;
+}
+
+html {
+  font-size: var(--type-base);
+}
+
+@media (min-width: 1200px) {
+  :root { --type-base: 18px; }
+}
+
+@media (max-width: 480px) {
+  :root { --type-base: 14px; }
+}
+
+/* Ensure images are responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Improve grid responsivity (testimonials & blog already use auto-fit) */
+.reviews-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.blog-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* Achievement stats stack earlier on medium screens */
+@media (max-width: 900px) {
+  .achievement-stats {
+    gap: 12px;
+  }
+
+  .stat-item {
+    flex: 1 1 40%;
+    text-align: center;
+    border-right: none;
+    padding-right: 0;
+  }
+}
+
+/* reduce heavy shadows & spacing on small devices */
+@media (max-width: 600px) {
+  .visa-section__card,
+  .visa-services__card,
+  .blog-card,
+  .review-card {
+    padding: 18px;
+  }
+
+  .hero-image img {
+    max-width: 320px;
+  }
+
+  .coaching-image-wrapper {
+    max-width: 100%;
+  }
+}
+
+/* Accessibility: visible focus outlines */
+a:focus, button:focus {
+  outline: 3px solid rgba(183, 28, 28, 0.25);
+  outline-offset: 2px;
+}
