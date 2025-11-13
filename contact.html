@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
+    <meta name="description" content="Visa Consultation and Application Portal" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Contact Us</title>
+</head>
+<body>
+
+    <header class="header">
+        <nav class="navbar container">
+            <a href="./index.html" class="logo">AMVISA</a>
+
+            <!-- mobile nav toggle -->
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="./study-visa.html">Study Visa</a></li>
+                <li><a href="./visit-visa.html">Visit Visa</a></li>
+                <li><a href="./work-visa.html">Work Visa</a></li>
+                <li><a href="./privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="./blog.html">Blog & Articles</a></li>
+                <li><a href="./contact.html">Contact Us</a></li>
+            </ul>
+            <a href="#" class="btn apply-now-btn">Apply Now</a>
+        </nav>
+    </header>
+
+    <!-- Page Header Section -->
+    <section class="page-header">
+        <div class="page-header-container">
+            <h1 class="page-header-title">Contact Us</h1>
+        </div>
+    </section>
+
+    <div class="main">
+        <!-- Contact Form Section -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <!-- Contact Info Cards -->
+                    <div class="contact-info-grid">
+                        <div class="contact-card">
+                            <div class="contact-card-icon">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 2C10.06 2 2 10.06 2 20s8.06 18 18 18 18-8.06 18-18S29.94 2 20 2zm0 32c-7.73 0-14-6.27-14-14S12.27 6 20 6s14 6.27 14 14-6.27 14-14 14zm3.5-9h-7V11h4v12h3v2z" fill="#8B0000"/>
+                                </svg>
+                            </div>
+                            <h3 class="contact-card-title">Business Hours</h3>
+                            <p class="contact-card-text">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            <p class="contact-card-text">Saturday - Sunday: 10:00 AM - 4:00 PM</p>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-card-icon">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 2C10.06 2 2 10.06 2 20s8.06 18 18 18 18-8.06 18-18S29.94 2 20 2zm0 32c-7.73 0-14-6.27-14-14S12.27 6 20 6s14 6.27 14 14-6.27 14-14 14zm1-22h-2v8l7 4.2 1-1.6-6-3.6V12z" fill="#8B0000"/>
+                                </svg>
+                            </div>
+                            <h3 class="contact-card-title">Call Us</h3>
+                            <a href="tel:+923198590542" class="contact-card-link">(+92) 319 8590542</a>
+                            <a href="tel:+1234567890" class="contact-card-link">+1 (234) 567-8900</a>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-card-icon">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 2C10.06 2 2 10.06 2 20s8.06 18 18 18 18-8.06 18-18S29.94 2 20 2zm0 32c-7.73 0-14-6.27-14-14S12.27 6 20 6s14 6.27 14 14-6.27 14-14 14zm7-18H13v2h14v-2z" fill="#8B0000"/>
+                                </svg>
+                            </div>
+                            <h3 class="contact-card-title">Email Us</h3>
+                            <a href="mailto:info@amvisa.com" class="contact-card-link">info@amvisa.com</a>
+                            <a href="mailto:support@amvisa.com" class="contact-card-link">support@amvisa.com</a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form-wrapper">
+                        <h2 class="contact-form-title">Send Us a Message</h2>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Full Name *</label>
+                                <input type="text" id="name" name="name" class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" id="email" name="email" class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Subject *</label>
+                                <input type="text" id="subject" name="subject" class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message" class="form-label">Message *</label>
+                                <textarea id="message" name="message" rows="6" class="form-textarea" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-submit">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section (Optional) -->
+        <section class="map-section">
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3322.467651625846!2d74.3587!3d31.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMxJzEzLjQiTiA3NMKwMjEnMzEuMiJF!5e0!3m2!1sen!2s!4v1234567890" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+    </div>
+
+    <footer id="footer-section">
+        <div id="footer-container">
+            <div id="footer-about">
+                <h2 id="footer-logo">A&M Visa Consultants</h2>
+                <p id="footer-description">Your trusted partner for visa consultation and application services.</p>
+                <div id="footer-social-icons">
+                </div>
+            </div>
+
+            <div id="footer-links">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-list">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./study-visa.html">Study Visa</a></li>
+                    <li><a href="./visit-visa.html">Visit Visa</a></li>
+                    <li><a href="./work-visa.html">Work Visa</a></li>
+                </ul>
+            </div>
+
+            <div id="footer-contact">
+                <h3 class="footer-heading">Contact Us</h3>
+                <ul class="footer-contact-list">
+                    <li><a href="mailto:info@amvisa.com">info@amvisa.com</a></li>
+                    <li><a href="tel:+1234567890">+1 (234) 567-8900</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="footer-bottom">
+            <p>© 2024 A&M Visa Consultants. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="./assets/js/main.js" defer></script>
+</body>
+</html>
