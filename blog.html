@@ -7,8 +7,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
         rel="stylesheet">
-    <meta name="description" content="Visa Consultation and Application Portal" />
+    <meta name="description" content="Blog & Articles - Visa Consultation" />
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/blog.css">
     <title>Blog & Articles</title>
 </head>
 <body>
@@ -17,7 +18,6 @@
         <nav class="navbar container">
             <a href="./index.html" class="logo">AMVISA</a>
 
-            <!-- mobile nav toggle -->
             <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
                 <span class="hamburger"></span>
             </button>
@@ -30,19 +30,47 @@
                 <li><a href="./blog.html">Blog & Articles</a></li>
                 <li><a href="./contact.html">Contact Us</a></li>
             </ul>
-            <a href="#" class="btn apply-now-btn">Apply Now</a>
+            <a href="./admin/login.php" class="btn apply-now-btn">Admin</a>
         </nav>
     </header>
 
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-container">
+            <h1 class="page-header-title">Blog & Articles</h1>
+        </div>
+    </section>
+
     <div class="main">
-        <!-- Blog Page -->
-        <section class="page-header">
-            <div class="page-header-container">
-                <h1 class="page-header-title">Blog & Articles</h1>
+        <!-- Blog Search Section -->
+        <section class="blog-search-section">
+            <div class="container">
+                <div class="blog-search-wrapper">
+                    <form class="blog-search-form" id="blogSearchForm">
+                        <input type="text" id="searchInput" class="blog-search-input" placeholder="Search here...">
+                        <button type="submit" class="blog-search-btn">
+                            <span>🔍</span> Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Blogs Section -->
+        <section class="blog-grid-section">
+            <div class="container">
+                <div class="blog-grid" id="blogGrid">
+                    <!-- Blogs will be loaded here via PHP -->
+                </div>
+                <div class="blog-pagination">
+                    <a href="#" class="pagination-prev">« Previous</a>
+                    <a href="#" class="pagination-next">Next »</a>
+                </div>
             </div>
         </section>
     </div>
 
+    <!-- Footer -->
     <footer id="footer-section">
         <div id="footer-container">
             <div id="footer-about">
@@ -63,6 +91,7 @@
                     <li><a href="./study-visa.html">Study Visa</a></li>
                     <li><a href="./visit-visa.html">Visit Visa</a></li>
                     <li><a href="./work-visa.html">Work Visa</a></li>
+                    <li><a href="./blog.html">Blog & Articles</a></li>
                 </ul>
             </div>
 
@@ -82,5 +111,6 @@
     </footer>
 
     <script src="./assets/js/main.js" defer></script>
+    <script src="./assets/js/blog.js" defer></script>
 </body>
 </html>

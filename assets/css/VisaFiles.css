@@ -1,0 +1,280 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== STUDY VISA PAGE SECTIONS ===== */
+
+.study-visa-section {
+    padding: 60px 16px;
+    background: #fff;
+}
+
+.study-visa-section.alt {
+    background: #f9f9f9;
+}
+
+.study-visa-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.study-visa-container.reverse {
+    direction: rtl;
+}
+
+.study-visa-container.reverse > * {
+    direction: ltr;
+}
+
+.study-visa-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.study-visa-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.study-visa-image:hover img {
+    transform: scale(1.05);
+}
+
+.study-visa-content {
+    padding: 20px;
+}
+
+.section-label {
+    display: inline-block;
+    background: #8B0000;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #2c2c2c;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.section-text {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.study-visa-list {
+    margin-bottom: 30px;
+}
+
+.list-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.list-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #8B0000;
+    color: #fff;
+    border-radius: 50%;
+    font-weight: 700;
+    margin-right: 12px;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+}
+
+.list-text {
+    line-height: 1.6;
+}
+
+.section-footer {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #8B0000 0%, #5a0000 100%);
+    color: #fff;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 0, 0, 0.3);
+}
+
+.contact-agent {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.contact-agent img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.agent-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.agent-label {
+    font-size: 0.8rem;
+    color: #999;
+    font-weight: 600;
+}
+
+.agent-phone {
+    color: #8B0000;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.agent-phone:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .study-visa-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .study-visa-container.reverse {
+        direction: ltr;
+    }
+
+    .study-visa-section {
+        padding: 40px 16px;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .section-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .study-visa-section {
+        padding: 30px 16px;
+    }
+
+    .study-visa-container {
+        gap: 20px;
+    }
+
+    .study-visa-content {
+        padding: 10px;
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+    }
+
+    .section-text {
+        font-size: 0.95rem;
+    }
+
+    .list-item {
+        margin-bottom: 12px;
+        font-size: 0.9rem;
+    }
+
+    .section-footer {
+        gap: 15px;
+    }
+
+    .btn-primary {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .study-visa-section {
+        padding: 20px 12px;
+    }
+
+    .section-label {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+        margin-bottom: 16px;
+    }
+
+    .section-text {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .list-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 0.8rem;
+        margin-right: 8px;
+    }
+
+    .list-item {
+        margin-bottom: 10px;
+        font-size: 0.85rem;
+    }
+
+    .section-footer {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px 20px;
+    }
+}
+
+
+
