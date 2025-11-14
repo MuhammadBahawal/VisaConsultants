@@ -14,6 +14,23 @@ if ($conn->connect_error) {
     exit;
 }
 
+// If a slug is provided, return single blog (prepared statement); otherwise return all blogs.
+if (!empty($_GET['slug'])) {
+    $slug = $_GET['slug'];
+    $stmt = $conn->prepare("SELECT id, title, slug, category, image_url, short_description, content, author_id, created_at FROM blogs WHERE slug = ? LIMIT 1");
+    $stmt->bind_param('s', $slug);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $blog = null;
+    if ($res && $res->num_rows > 0) {
+        $blog = $res->fetch_assoc();
+    }
+    echo json_encode(['blog' => $blog]);
+    $stmt->close();
+    $conn->close();
+    exit;
+}
+
 $sql = "SELECT id, title, slug, category, image_url, short_description, content, author_id, created_at FROM blogs ORDER BY created_at DESC";
 $result = $conn->query($sql);
 

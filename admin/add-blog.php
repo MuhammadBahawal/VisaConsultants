@@ -33,6 +33,41 @@ if (isset($_GET['id'])) {
 $error = '';
 $success = '';
 
+// ✅ FUNCTION TO GENERATE UNIQUE SLUG
+function generateUniqueSlug($conn, $baseSlug, $excludeId = null) {
+    $slug = $baseSlug;
+    $counter = 1;
+    
+    while (true) {
+        $check = "SELECT id FROM blogs WHERE slug = ?";
+        
+        // If editing, exclude current blog from duplicate check
+        if ($excludeId) {
+            $check .= " AND id != ?";
+        }
+        
+        $stmt = $conn->prepare($check);
+        
+        if ($excludeId) {
+            $stmt->bind_param("si", $slug, $excludeId);
+        } else {
+            $stmt->bind_param("s", $slug);
+        }
+        
+        $stmt->execute();
+        
+        if ($stmt->get_result()->num_rows === 0) {
+            $stmt->close();
+            return $slug;
+        }
+        
+        $stmt->close();
+        $slug = $baseSlug . '-' . $counter;
+        $counter++;
+    }
+}
+
+// ✅ HANDLE FORM SUBMISSION
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
@@ -41,16 +76,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content = $_POST['content'] ?? '';
     $image_url_input = trim($_POST['image_url'] ?? '');
 
-    // Default: use provided URL (may be empty)
+    // Default: use provided URL
     $final_image = $image_url_input;
 
-    // If a file was uploaded successfully, process it and prefer it over URL
+    // ✅ HANDLE FILE UPLOAD
     if (!empty($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
         $file = $_FILES['image_file'];
         $allowed = ['image/jpeg','image/png','image/gif','image/webp'];
         if (!in_array(mime_content_type($file['tmp_name']), $allowed)) {
             $error = "Invalid image type. Allowed: jpeg, png, gif, webp.";
-        } elseif ($file['size'] > 4 * 1024 * 1024) { // 4MB limit
+        } elseif ($file['size'] > 4 * 1024 * 1024) {
             $error = "Image too large (max 4MB).";
         } else {
             $uploadsDir = __DIR__ . '/../assets/uploads';
@@ -62,7 +97,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dest = $uploadsDir . '/' . $filename;
 
             if (move_uploaded_file($file['tmp_name'], $dest)) {
-                // store web-accessible relative path
                 $final_image = 'assets/uploads/' . $filename;
             } else {
                 $error = "Failed to move uploaded file.";
@@ -70,21 +104,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+    // ✅ VALIDATE REQUIRED FIELDS
     if (empty($title) || empty($slug)) {
         $error = $error ?? "Title and slug are required.";
     }
 
+    // ✅ GENERATE UNIQUE SLUG (BEFORE DATABASE INSERT)
     if (empty($error)) {
-        // Use prepared statement to insert
-        $stmt = $conn->prepare("INSERT INTO blogs (title, slug, category, image_url, short_description, content, author_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $author_id = $_SESSION['user_id'] ?? 1;
-        $stmt->bind_param('ssssssi', $title, $slug, $category, $final_image, $short_description, $content, $author_id);
-        if ($stmt->execute()) {
-            header('Location: ./manage-blogs.php?msg=created');
-            exit;
+        $excludeId = $isEdit ? $blog['id'] : null;
+        $slug = generateUniqueSlug($conn, $slug, $excludeId);
+
+        // ✅ INSERT OR UPDATE IN BLOGS TABLE (NOT blog_posts)
+        if ($isEdit) {
+            // UPDATE existing blog
+            $stmt = $conn->prepare("UPDATE blogs SET title=?, slug=?, category=?, image_url=?, short_description=?, content=? WHERE id=?");
+            $stmt->bind_param('ssssssi', $title, $slug, $category, $final_image, $short_description, $content, $blog['id']);
+            
+            if ($stmt->execute()) {
+                header('Location: ./dashboard.php?msg=updated');
+                exit;
+            } else {
+                $error = "Database error: " . $stmt->error;
+            }
         } else {
-            $error = "Database error: " . $stmt->error;
+            // INSERT new blog
+            $stmt = $conn->prepare("INSERT INTO blogs (title, slug, category, image_url, short_description, content, author_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $author_id = $_SESSION['user_id'] ?? 1;
+            $stmt->bind_param('ssssssi', $title, $slug, $category, $final_image, $short_description, $content, $author_id);
+            
+            if ($stmt->execute()) {
+                header('Location: ./dashboard.php?msg=created');
+                exit;
+            } else {
+                $error = "Database error: " . $stmt->error;
+            }
         }
+        
+        $stmt->close();
     }
 }
 
@@ -100,6 +156,7 @@ $conn->close();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
         rel="stylesheet">
+        
     <title><?php echo $isEdit ? 'Edit' : 'Add'; ?> Blog - Admin Dashboard</title>
     <style>
         * {
@@ -322,7 +379,7 @@ $conn->close();
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-logo">AMVISA</div>
+            <div class="sidebar-logo">Smart Study</div>
             <nav class="sidebar-nav">
                 <a href="dashboard.php">📊 Dashboard</a>
                 <a href="add-blog.php" class="active">➕ Add Blog</a>
@@ -346,7 +403,6 @@ $conn->close();
                     <div class="success-message"><?php echo htmlspecialchars($success); ?></div>
                 <?php endif; ?>
 
-                <!-- Add/replace form portion with enctype and both fields -->
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="form-label">Blog Title *</label>

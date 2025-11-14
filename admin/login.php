@@ -186,7 +186,7 @@ $conn->close();
         <a href="../index.html" class="back-link">← Back to Home</a>
 
         <div class="login-header">
-            <div class="login-logo">AMVISA</div>
+            <div class="login-logo">Smart Study</div>
             <p class="login-subtitle">Admin Dashboard Login</p>
         </div>
 
@@ -209,7 +209,7 @@ $conn->close();
         </form>
 
         <div class="login-footer">
-            Test Account: <strong>admin@amvisa.com</strong> | Password: <strong>admin123</strong>
+            Test Account: <strong>admin@SmartStudy.com</strong> | Password: <strong>admin123</strong>
         </div>
     </div>
 

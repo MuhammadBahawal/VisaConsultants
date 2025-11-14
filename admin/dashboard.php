@@ -279,7 +279,7 @@ $conn->close();
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-logo">AMVISA</div>
+            <div class="sidebar-logo">Smart Study</div>
             <nav class="sidebar-nav">
                 <a href="dashboard.php" class="active">📊 Dashboard</a>
                 <a href="add-blog.php">➕ Add Blog</a>

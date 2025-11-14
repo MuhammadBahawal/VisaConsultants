@@ -11,6 +11,7 @@ a {
   color: inherit;
 }
 
+/* ===== HEADER & NAVBAR ===== */
 .header {
   background: transparent;
   position: sticky;
@@ -20,55 +21,76 @@ a {
   justify-content: center;
   align-items: center;
   background-color: rgba(12, 22, 50, 0.192);
+  font-size: unset;
+  line-height: unset;
 }
 
-.navbar {
-
-  width: 100%;
+.header .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 0.75rem 0;
-  /* border-radius: 50px */
+  justify-content: space-between;
+  padding: 1rem 0;
+  width: 100%;
+  max-width: 1200px;
 }
 
-.logo {
+/* Single logo style */
+.logo,
+.header .logo {
   font-weight: 700;
   font-size: 1.5rem;
   color: #9f0808;
   letter-spacing: 2px;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-links {
+/* Single nav-links style */
+.nav-links,
+.header .nav-links {
   display: flex;
   list-style: none;
   gap: 1.7rem;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-links a {
-  font-weight: 800;
-  /* font-size: ; */
+/* Single nav link style */
+.nav-links a,
+.header .nav-links a {
+  font-weight: 600;
+  font-size: 1rem;
   color: #9f0808;
+  text-decoration: none;
   transition: color 0.3s;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.header .nav-links a:hover {
   color: black;
 }
 
+/* Button styling */
 .btn {
   padding: 0.5rem 1.5rem;
   border-radius: 40px;
-  font-weight: 800;
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
   border: none;
   transition: background-color 0.3s ease;
   text-align: center;
+  margin: 0;
 }
 
-.apply-now-btn {
+.apply-now-btn,
+.header .apply-now-btn {
   background-color: #9b1c1c;
   color: #fff;
+  padding: 0.75rem 1.5rem;
 }
 
 .apply-now-btn:hover,
@@ -77,8 +99,6 @@ a {
   color: black;
   outline: none;
 }
-
-
 
 /* ==== HERO SECTION ==== */
 .hero {
@@ -1811,4 +1831,56 @@ button:focus {
   background: #fff !important;
 }
 
-/* ===== end navbar overrides ===== */
+/* Navbar - Blog Detail Page Override */
+.header .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.header .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.header .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.header .nav-links a {
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.header .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.header .apply-now-btn {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    margin: 0;
+}
+
+/* Reset any conflicting styles from blogdetail.css */
+.header {
+    font-size: unset;
+    line-height: unset;
+}

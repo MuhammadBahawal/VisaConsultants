@@ -12,10 +12,9 @@ async function loadBlogDetail() {
     }
 
     try {
-        const res = await fetch('./api/get-blog.php');
+        const res = await fetch(`./api/get-blog.php?slug=${encodeURIComponent(slug)}`);
         const data = await res.json();
-        const blogs = data.blogs || [];
-        const blog = blogs.find(b => b.slug === decodeURIComponent(slug) || b.slug === slug);
+        const blog = data.blog || null;
         if (!blog) {
             container.innerHTML = '<p style="text-align:center;padding:40px;">Article not found.</p>';
             return;
@@ -26,7 +25,7 @@ async function loadBlogDetail() {
         const imageHtml = blog.image_url ? `<div class="blog-detail-image"><img src="${escapeHtml(blog.image_url)}" alt="${escapeHtml(blog.title)}"></div>` : '';
         const date = blog.created_at ? new Date(blog.created_at).toLocaleDateString() : '';
         const category = blog.category ? `<small style="color:#0b6efd">${escapeHtml(blog.category)}</small>` : '';
-        const contentHtml = blog.content ? blog.content : blog.short_description || '';
+        const contentHtml = blog.content ? blog.content : (blog.short_description || '');
 
         container.innerHTML = `
             <div class="blog-detail-hero">
