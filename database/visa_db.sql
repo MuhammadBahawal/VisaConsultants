@@ -27,8 +27,14 @@ CREATE TABLE IF NOT EXISTS blogs (
 );
 
 -- Insert sample admin user (password: admin123)
+-- Replace the placeholder below with a real bcrypt hash generated locally.
+-- Generate hash locally with: php -r "echo password_hash('admin123', PASSWORD_BCRYPT).PHP_EOL;"
+
 INSERT INTO users (username, email, password) VALUES 
-('admin', 'admin@amvisa.com', '$2y$10$YIjlrJ5Z8JZ8J8J8J8J8J8J8J8J8J8J8J8J8J8J8J8J8J8J8J8J');
+('ahsan@911', 'ahsan@gmail.com', '$2y$10$1sUj6JAfkGS06pVAf9D9rOb2vOiZm63vxeNU2TAht6MrZWTrlYl36');
+
+-- Or after importing run (replace <HASH> with generated hash):
+-- UPDATE users SET password = '<HASH>' WHERE email = 'admin@amvisa.com';
 
 -- Insert sample blogs
 INSERT INTO blogs (title, slug, category, image_url, short_description, content, author_id) VALUES

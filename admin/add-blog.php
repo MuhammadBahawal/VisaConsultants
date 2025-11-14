@@ -33,37 +33,57 @@ if (isset($_GET['id'])) {
 $error = '';
 $success = '';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $title = $conn->real_escape_string($_POST['title']);
-    $slug = strtolower(str_replace(' ', '-', $title));
-    $category = $conn->real_escape_string($_POST['category']);
-    $image_url = $conn->real_escape_string($_POST['image_url']);
-    $short_description = $conn->real_escape_string($_POST['short_description']);
-    $content = $conn->real_escape_string($_POST['content']);
-    $author_id = $_SESSION['user_id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title = trim($_POST['title'] ?? '');
+    $slug = trim($_POST['slug'] ?? '');
+    $category = trim($_POST['category'] ?? '');
+    $short_description = trim($_POST['short_description'] ?? '');
+    $content = $_POST['content'] ?? '';
+    $image_url_input = trim($_POST['image_url'] ?? '');
 
-    if (empty($title) || empty($category) || empty($content)) {
-        $error = 'Please fill in all required fields';
-    } else {
-        if ($isEdit && isset($_GET['id'])) {
-            $id = (int)$_GET['id'];
-            $sql = "UPDATE blogs SET title='$title', slug='$slug', category='$category', image_url='$image_url', short_description='$short_description', content='$content' WHERE id=$id";
-            if ($conn->query($sql)) {
-                $success = 'Blog updated successfully!';
-                header('Location: dashboard.php');
-                exit;
-            } else {
-                $error = 'Error updating blog';
-            }
+    // Default: use provided URL (may be empty)
+    $final_image = $image_url_input;
+
+    // If a file was uploaded successfully, process it and prefer it over URL
+    if (!empty($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
+        $file = $_FILES['image_file'];
+        $allowed = ['image/jpeg','image/png','image/gif','image/webp'];
+        if (!in_array(mime_content_type($file['tmp_name']), $allowed)) {
+            $error = "Invalid image type. Allowed: jpeg, png, gif, webp.";
+        } elseif ($file['size'] > 4 * 1024 * 1024) { // 4MB limit
+            $error = "Image too large (max 4MB).";
         } else {
-            $sql = "INSERT INTO blogs (title, slug, category, image_url, short_description, content, author_id) VALUES ('$title', '$slug', '$category', '$image_url', '$short_description', '$content', $author_id)";
-            if ($conn->query($sql)) {
-                $success = 'Blog created successfully!';
-                header('Location: dashboard.php');
-                exit;
+            $uploadsDir = __DIR__ . '/../assets/uploads';
+            if (!is_dir($uploadsDir)) mkdir($uploadsDir, 0755, true);
+
+            $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $safeName = preg_replace('/[^a-z0-9_\-\.]/i', '_', pathinfo($file['name'], PATHINFO_FILENAME));
+            $filename = $safeName . '_' . time() . '.' . $ext;
+            $dest = $uploadsDir . '/' . $filename;
+
+            if (move_uploaded_file($file['tmp_name'], $dest)) {
+                // store web-accessible relative path
+                $final_image = 'assets/uploads/' . $filename;
             } else {
-                $error = 'Error creating blog';
+                $error = "Failed to move uploaded file.";
             }
+        }
+    }
+
+    if (empty($title) || empty($slug)) {
+        $error = $error ?? "Title and slug are required.";
+    }
+
+    if (empty($error)) {
+        // Use prepared statement to insert
+        $stmt = $conn->prepare("INSERT INTO blogs (title, slug, category, image_url, short_description, content, author_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $author_id = $_SESSION['user_id'] ?? 1;
+        $stmt->bind_param('ssssssi', $title, $slug, $category, $final_image, $short_description, $content, $author_id);
+        if ($stmt->execute()) {
+            header('Location: ./manage-blogs.php?msg=created');
+            exit;
+        } else {
+            $error = "Database error: " . $stmt->error;
         }
     }
 }
@@ -326,10 +346,16 @@ $conn->close();
                     <div class="success-message"><?php echo htmlspecialchars($success); ?></div>
                 <?php endif; ?>
 
-                <form method="POST">
+                <!-- Add/replace form portion with enctype and both fields -->
+                <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="form-label">Blog Title *</label>
                         <input type="text" name="title" class="form-input" required value="<?php echo $isEdit ? htmlspecialchars($blog['title']) : ''; ?>" placeholder="Enter blog title">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Slug *</label>
+                        <input type="text" name="slug" class="form-input" required value="<?php echo $isEdit ? htmlspecialchars($blog['slug']) : ''; ?>" placeholder="Enter blog slug">
                     </div>
 
                     <div class="form-group">
@@ -344,8 +370,13 @@ $conn->close();
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Image URL</label>
+                        <label class="form-label">Image URL (external)</label>
                         <input type="url" name="image_url" class="form-input" value="<?php echo $isEdit ? htmlspecialchars($blog['image_url']) : ''; ?>" placeholder="https://example.com/image.jpg">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Upload Image (jpg, png, gif, webp)</label>
+                        <input type="file" name="image_file" accept="image/*" class="form-input">
                     </div>
 
                     <div class="form-group">
