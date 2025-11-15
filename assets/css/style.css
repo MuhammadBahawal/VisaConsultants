@@ -204,6 +204,11 @@ a {
   .navbar > .apply-now-btn {
     display: none;
   }
+  .nav-links a,
+.header .nav-links a {
+  color: #fff !important;
+
+}
 
   /* Mobile Menu Panel */
   .nav-links {
@@ -240,18 +245,19 @@ a {
     display: inline-block !important;
     width: 100%;
     max-width: 420px;
-    margin-top: 8px;
+    margin-top: 16px;
     padding: 14px 24px;
     background-color: #9b1c1c;
-    color: #fff !important;
+    color: #ffffff !important;
     text-align: center;
     border-radius: 8px;
     font-weight: 700;
     font-size: 1rem;
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease, color 0.3s ease;
     opacity: 0;
     transform: translateY(-10px);
+    box-shadow: 0 4px 12px rgba(155, 28, 28, 0.3);
   }
 
   /* Show button when menu opens */
@@ -503,8 +509,12 @@ a {
   }
 
   .hero-container {
-    flex-direction: column-reverse;
+    /* flex-direction: column-reverse; */
     text-align: center;
+    gap: 40px;
+  }
+  .hero-buttons{
+    justify-content: center;
   }
 
   .hero-content {
@@ -514,8 +524,14 @@ a {
   .hero-content h1 {
     font-size: 2.2rem;
   }
+  .hero-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .hero-image img {
+
     max-width: 350px;
   }
 }
@@ -527,7 +543,7 @@ a {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 3%;
+  /* padding-top: %; */
   background-color: #f8f9fa;
 }
 
@@ -1797,17 +1813,22 @@ button:focus {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.2fr 0.7fr 0.9fr;
-  gap: 28px;
+  gap: 40px;
   align-items: start;
 }
 
 /* About / logo block */
+#footer-about {
+  grid-column: 1;
+}
+
 #footer-about #footer-logo,
 #footer-about h2#footer-logo {
   font-size: 1.35rem;
   color: #fff;
-  margin: 0 0 8px;
+  margin: 0 0 12px;
   letter-spacing: 1px;
+  font-weight: 700;
 }
 
 #footer-about #footer-description {
@@ -1815,14 +1836,14 @@ button:focus {
   font-size: 0.95rem;
   line-height: 1.6;
   max-width: 480px;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
 /* Social icons */
 #footer-social-icons {
   display: flex;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 16px;
 }
 
 #footer-social-icons .social-icon {
@@ -1845,11 +1866,21 @@ button:focus {
 }
 
 /* Links column */
+#footer-links {
+  grid-column: 2;
+}
+
+#footer-contact {
+  grid-column: 3;
+}
+
 #footer-links .footer-heading,
 #footer-contact .footer-heading {
   color: #ffffff;
   font-weight: 700;
-  margin-bottom: 10px;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
 }
 
 .footer-list,
@@ -1861,14 +1892,16 @@ button:focus {
 
 .footer-list li,
 .footer-contact-list li {
-  margin: 8px 0;
+  margin: 10px 0;
 }
 
 .footer-list a {
   color: #cfe6ff;
   text-decoration: none;
   font-weight: 600;
+  font-size: 0.95rem;
   transition: color .12s ease, transform .12s ease;
+  display: inline-block;
 }
 
 .footer-list a:hover {
@@ -1881,6 +1914,9 @@ button:focus {
   color: #cfe6ff;
   text-decoration: none;
   display: block;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  transition: color .12s ease;
 }
 
 .footer-contact-list a:hover {
@@ -1891,9 +1927,9 @@ button:focus {
 /* Footer bottom bar */
 #footer-bottom {
   max-width: 1200px;
-  margin: 18px auto 0;
-  padding: 14px 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  margin: 32px auto 0;
+  padding: 20px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   color: #9fb4d0;
   font-size: 0.92rem;
   text-align: center;
@@ -1901,36 +1937,137 @@ button:focus {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent);
 }
 
-/* Small responsive adjustments */
-@media (max-width: 900px) {
+/* ===== Responsive Footer Design ===== */
+
+/* Large screens (laptops/desktops) - 993px and above: 3 columns as is */
+@media (min-width: 993px) {
   #footer-container {
-    grid-template-columns: 1fr;
-    gap: 18px;
+    grid-template-columns: 1.2fr 0.7fr 0.9fr;
+    gap: 40px;
+  }
+}
+
+/* Medium screens (tablets) - 400px to 992px: About in one row, Links & Contact in two columns */
+@media (min-width: 400px) and (max-width: 992px) {
+  #footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  #footer-about {
+    grid-column: 1;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  #footer-about #footer-description {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Quick Links and Contact in two columns side by side */
+  #footer-links {
+    grid-column: 1;
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+    margin-right: 4%;
+    text-align: left;
+  }
+
+  #footer-contact {
+    grid-column: 2;
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
     text-align: left;
   }
 
   #footer-about #footer-logo {
     font-size: 1.25rem;
   }
+
+  #footer-links .footer-heading,
+  #footer-contact .footer-heading {
+    text-align: left;
+  }
 }
 
-@media (max-width: 480px) {
+/* Small screens (mobile) - below 400px: All sections stacked in one column */
+@media (max-width: 399px) {
   #footer-section {
     padding: 36px 12px 22px;
   }
 
   #footer-container {
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
+  }
+
+  #footer-about {
+    grid-column: 1;
+    margin-bottom: 0;
+  }
+
+  #footer-about #footer-logo {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  #footer-about #footer-description {
+    max-width: 100%;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+
+  #footer-social-icons {
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  #footer-links {
+    grid-column: 1;
+    width: 100% !important;
+    margin-right: 0 !important;
+    margin-bottom: 0;
+    display: block !important;
+  }
+
+  #footer-contact {
+    grid-column: 1;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  #footer-links .footer-heading,
+  #footer-contact .footer-heading {
+    font-size: 1rem;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  .footer-list li,
+  .footer-contact-list li {
+    margin: 8px 0;
+  }
+
+  .footer-list a,
+  .footer-contact-list a {
+    font-size: 0.9rem;
   }
 
   #footer-social-icons .social-icon {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
   }
 
   #footer-bottom {
-    font-size: 0.85rem;
-    padding: 12px;
+    font-size: 0.8rem;
+    padding: 14px 10px;
+    margin-top: 24px;
   }
 }
 
@@ -1993,4 +2130,28 @@ button:focus {
   top: 5px;
   font-size: 25px;
   cursor: pointer;
+}
+
+
+
+.whatsapp-float {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  bottom: 25px; /* thora upar dikhayega */
+  right: 25px;  /* side se spacing */
+  z-index: 9999;
+}
+
+.whatsapp-float img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover img {
+  transform: scale(1.1);
 }

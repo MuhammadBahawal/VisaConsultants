@@ -1,10 +1,41 @@
 document.addEventListener('DOMContentLoaded', function () {
   const toggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
+  const applyBtn = document.querySelector('.apply-now-btn');
 
   if (!toggle || !navLinks) return;
 
   const CLOSING_MS = 720; // keep in sync with .nav-links.closing transition
+
+  // Move Apply Now button into mobile menu on mobile/tablet
+  function moveApplyButtonToMenu() {
+    if (window.innerWidth <= 992 && applyBtn && navLinks) {
+      // Check if button clone already exists in menu
+      const existingMenuBtn = navLinks.querySelector('.apply-now-btn');
+      if (!existingMenuBtn) {
+        // Clone the button and add to menu
+        const clonedBtn = applyBtn.cloneNode(true);
+        clonedBtn.classList.add('apply-now-btn');
+        navLinks.appendChild(clonedBtn);
+      }
+    } else {
+      // Remove button clone from menu on desktop
+      const menuBtn = navLinks.querySelector('.apply-now-btn');
+      if (menuBtn) {
+        menuBtn.remove();
+      }
+    }
+  }
+
+  // Initial check
+  moveApplyButtonToMenu();
+
+  // Update on resize
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(moveApplyButtonToMenu, 100);
+  });
 
   function openMenu() {
     // ensure no leftover closing state
@@ -15,6 +46,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // prevent background scroll while open
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
+    // Ensure button is in menu
+    moveApplyButtonToMenu();
   }
 
   function closeMenu() {
@@ -37,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
     else openMenu();
   });
 
-  // close menu when clicking a navigation link
+  // close menu when clicking a navigation link or apply button
   navLinks.addEventListener('click', function (e) {
     const el = e.target;
     if (el.tagName === 'A' || el.closest('a')) {
