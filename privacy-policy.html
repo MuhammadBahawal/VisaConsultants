@@ -10,8 +10,517 @@
         rel="stylesheet">
     <meta name="description" content="Privacy Policy - Visa Consultation and Application Portal" />
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/privacypolicy.css">
     <title>Privacy Policy</title>
+
+    <style>
+        
+
+.privacy-policy-content {
+  background: #ffffff !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+  display: block !important;
+}
+
+.privacy-policy-container {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* ===== Section 1: Privacy Policy Intro ===== */
+.privacy-policy-intro {
+  padding: 80px 0 !important;
+  background: #ffffff !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: block !important;
+}
+
+.privacy-policy-intro-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 60px !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+}
+
+.privacy-policy-intro-image {
+  flex: 1 1 400px !important;
+  min-height: 400px !important;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%) !important;
+  border-radius: 12px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-image: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect fill="%23f0f0f0" width="400" height="400"/><path d="M50 100 L350 100 L350 280 L50 280 Z" fill="%23d4d4d4" stroke="%23bbb" stroke-width="2"/><circle cx="120" cy="140" r="3" fill="%23ff6b6b"/><circle cx="150" cy="140" r="3" fill="%23ffa500"/><circle cx="180" cy="140" r="3" fill="%23ffd700"/><rect x="100" y="170" width="200" height="80" fill="%23ffffff" stroke="%23ccc" stroke-width="1"/></svg>') !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.privacy-policy-image-overlay {
+  background: rgba(173, 216, 230, 0.95);
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.privacy-policy-overlay-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #000000;
+  text-align: center;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.privacy-policy-intro-text {
+  flex: 1 1 450px !important;
+  display: block !important;
+}
+
+.privacy-policy-intro-heading {
+  font-size: 2.5rem !important;
+  font-weight: 800 !important;
+  color: #9f0808 !important;
+  text-transform: uppercase !important;
+  margin: 0 0 24px 0 !important;
+  letter-spacing: 1px !important;
+  line-height: 1.2 !important;
+  display: block !important;
+}
+
+.privacy-policy-intro-description {
+  font-size: 1.1rem !important;
+  line-height: 1.8 !important;
+  color: #333333 !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+/* ===== Section 2: Information We Collect ===== */
+.privacy-policy-collect {
+  padding: 80px 0 !important;
+  background: #f8f9fa !important;
+  width: 100% !important;
+  display: block !important;
+  box-sizing: border-box !important;
+}
+
+.privacy-policy-collect-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 60px !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+}
+
+.privacy-policy-collect-text {
+  flex: 1 1 500px;
+}
+
+.privacy-policy-collect-heading {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #9f0808;
+  text-transform: uppercase;
+  margin: 0 0 24px 0;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.privacy-policy-collect-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333333;
+  margin: 0 0 24px 0;
+}
+
+.privacy-policy-collect-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.privacy-policy-collect-item {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #333333;
+  margin: 16px 0;
+  padding-left: 24px;
+  position: relative;
+}
+
+.privacy-policy-collect-item::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #9f0808;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.privacy-policy-collect-label {
+  color: #9f0808;
+  font-weight: 700;
+}
+
+.privacy-policy-collect-image {
+  flex: 1 1 400px;
+  min-height: 400px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.privacy-policy-sphere {
+  width: 200px;
+  height: 200px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #000000;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2), 
+              0 0 0 30px rgba(76, 175, 80, 0.1),
+              0 0 0 60px rgba(255, 255, 255, 0.9),
+              0 0 0 90px rgba(76, 175, 80, 0.05);
+  position: relative;
+  z-index: 2;
+}
+
+.privacy-policy-sphere::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.3) 0%, rgba(255, 255, 255, 0.9) 100%);
+  border-radius: 50%;
+  z-index: -1;
+  top: -50px;
+  left: -50px;
+}
+
+/* ===== Section 3: How We Use Your Information ===== */
+.privacy-policy-use {
+  padding: 100px 0 !important;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 100%),
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600"><defs><pattern id="keyboard" x="0" y="0" width="100" height="60" patternUnits="userSpaceOnUse"><rect width="100" height="60" fill="%231a1a1a"/><rect x="5" y="5" width="12" height="12" fill="%23333" rx="2"/><rect x="22" y="5" width="12" height="12" fill="%23333" rx="2"/><rect x="39" y="5" width="12" height="12" fill="%23333" rx="2"/><rect x="56" y="5" width="12" height="12" fill="%23333" rx="2"/><rect x="73" y="5" width="12" height="12" fill="%23333" rx="2"/><rect x="90" y="5" width="12" height="12" fill="%23333" rx="2"/></pattern></defs><rect width="1200" height="600" fill="url(%23keyboard)"/></svg>') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  position: relative !important;
+  color: #ffffff !important;
+  width: 100% !important;
+  display: block !important;
+  box-sizing: border-box !important;
+}
+
+.privacy-policy-use::before {
+  content: "";
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><path d="M20 10C16.13 10 13 13.13 13 17V20C11.9 20 11 20.9 11 22V30C11 31.1 11.9 32 13 32H27C28.1 32 29 31.1 29 30V22C29 20.9 28.1 20 27 20V17C27 13.13 23.87 10 20 10ZM20 13C22.76 13 25 15.24 25 18V20H15V18C15 15.24 17.24 13 20 13ZM20 24C21.1 24 22 24.9 22 26C22 27.1 21.1 28 20 28C18.9 28 18 27.1 18 26C18 24.9 18.9 24 20 24Z" fill="%23ffffff"/></svg>');
+  background-size: 40px 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+}
+
+.privacy-policy-use-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.privacy-policy-use-heading {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0 0 40px 0;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.privacy-policy-use-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.privacy-policy-use-item {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #ffffff;
+  margin: 20px 0;
+  padding-left: 32px;
+  position: relative;
+}
+
+.privacy-policy-use-item::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: rgba(159, 8, 8, 0.8);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+/* ===== Section 4: How We Protect Your Information ===== */
+.privacy-policy-protect {
+  padding: 80px 0 !important;
+  background: #ffffff !important;
+  width: 100% !important;
+  display: block !important;
+  box-sizing: border-box !important;
+}
+
+.privacy-policy-protect-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 60px !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+}
+
+.privacy-policy-protect-text {
+  flex: 1 1 500px;
+}
+
+.privacy-policy-protect-heading {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #9f0808;
+  text-transform: uppercase;
+  margin: 0 0 24px 0;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.privacy-policy-protect-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333333;
+  margin: 0;
+}
+
+.privacy-policy-protect-image {
+  flex: 1 1 400px;
+  min-height: 400px;
+  background: linear-gradient(135deg, #0c1632 0%, #081426 100%);
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.privacy-policy-security-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  position: relative;
+  width: 100%;
+}
+
+.privacy-policy-icon-item {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  min-width: 120px;
+  position: relative;
+}
+
+.privacy-policy-icon-lock {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.privacy-policy-icon-lock svg {
+  width: 40px;
+  height: 40px;
+}
+
+/* Connecting lines between icons */
+.privacy-policy-security-icons::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 20%,
+    rgba(255, 255, 255, 0.3) 80%,
+    transparent 100%);
+  z-index: 1;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 992px) {
+  .privacy-policy-intro,
+  .privacy-policy-collect,
+  .privacy-policy-protect {
+    padding: 60px 0;
+  }
+
+  .privacy-policy-use {
+    padding: 80px 0;
+  }
+
+  .privacy-policy-intro-wrapper,
+  .privacy-policy-collect-wrapper,
+  .privacy-policy-protect-wrapper {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .privacy-policy-intro-image,
+  .privacy-policy-collect-image,
+  .privacy-policy-protect-image {
+    width: 100%;
+    min-height: 300px;
+  }
+
+  .privacy-policy-intro-heading,
+  .privacy-policy-collect-heading,
+  .privacy-policy-use-heading,
+  .privacy-policy-protect-heading {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .privacy-policy-intro,
+  .privacy-policy-collect,
+  .privacy-policy-protect {
+    padding: 40px 0;
+  }
+
+  .privacy-policy-use {
+    padding: 60px 0;
+    background-attachment: scroll;
+  }
+
+  .privacy-policy-container {
+    padding: 0 16px;
+  }
+
+  .privacy-policy-intro-heading,
+  .privacy-policy-collect-heading,
+  .privacy-policy-use-heading,
+  .privacy-policy-protect-heading {
+    font-size: 1.75rem;
+  }
+
+  .privacy-policy-intro-description,
+  .privacy-policy-collect-description,
+  .privacy-policy-protect-description {
+    font-size: 1rem;
+  }
+
+  .privacy-policy-overlay-title {
+    font-size: 1.5rem;
+  }
+
+  .privacy-policy-sphere {
+    width: 150px;
+    height: 150px;
+    font-size: 1rem;
+  }
+
+  .privacy-policy-use-item {
+    font-size: 1.1rem;
+  }
+
+  .privacy-policy-security-icons {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .privacy-policy-security-icons::before {
+    width: 2px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    background: linear-gradient(180deg, 
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 20%,
+      rgba(255, 255, 255, 0.3) 80%,
+      transparent 100%);
+  }
+}
+
+@media (max-width: 480px) {
+  .privacy-policy-intro-heading,
+  .privacy-policy-collect-heading,
+  .privacy-policy-use-heading,
+  .privacy-policy-protect-heading {
+    font-size: 1.5rem;
+  }
+
+  .privacy-policy-image-overlay {
+    padding: 20px 24px;
+  }
+
+  .privacy-policy-overlay-title {
+    font-size: 1.2rem;
+  }
+}
+
+
+    </style>
 </head>
 
 <body>
@@ -45,13 +554,121 @@
             </div>
         </section>
 
-        <!-- Privacy Policy Content -->
-       
+        <!-- Privacy Policy Content Sections -->
+        <section class="privacy-policy-content">
+            <!-- Section 1: Privacy Policy Intro -->
+            <div class="privacy-policy-intro">
+                <div class="privacy-policy-container">
+                    <div class="privacy-policy-intro-wrapper">
+                        <div class="privacy-policy-intro-image">
+                            <div class="privacy-policy-image-overlay">
+                                <h2 class="privacy-policy-overlay-title">PRIVACY POLICY</h2>
+                            </div>
+                        </div>
+                        <div class="privacy-policy-intro-text">
+                            <h2 class="privacy-policy-intro-heading">PRIVACY POLICY FOR A&M VISA CONSULTANTS</h2>
+                            <p class="privacy-policy-intro-description">
+                                At A&M Visa Consultants, we are committed to protecting your privacy. This Privacy
+                                Policy explains how we collect, use, disclose, and safeguard your information when you
+                                visit our website and use our services. Please read this Privacy Policy carefully to
+                                understand our practices regarding your personal data.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Information We Collect -->
+            <div class="privacy-policy-collect">
+                <div class="privacy-policy-container">
+                    <div class="privacy-policy-collect-wrapper">
+                        <div class="privacy-policy-collect-text">
+                            <h2 class="privacy-policy-collect-heading">INFORMATION WE COLLECT</h2>
+                            <p class="privacy-policy-collect-description">
+                                We may collect personal information from you in various ways when you interact with our
+                                website, services, or communicate with us. This includes information you provide
+                                directly and information collected automatically.
+                            </p>
+                            <ul class="privacy-policy-collect-list">
+                                <li class="privacy-policy-collect-item">
+                                    <strong class="privacy-policy-collect-label">Personal Identification
+                                        Information:</strong> Name, email address, phone number, and any other
+                                    information you provide.
+                                </li>
+                                <li class="privacy-policy-collect-item">
+                                    <strong class="privacy-policy-collect-label">Non-Personal Identification
+                                        Information:</strong> Browser type, Internet Service Provider (ISP),
+                                    referring/exit pages, and date/time stamps.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="privacy-policy-collect-image">
+                            <div class="privacy-policy-sphere">PRIVACY POLICY</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: How We Use Your Information -->
+            <div class="privacy-policy-use">
+                <div class="privacy-policy-container">
+                    <div class="privacy-policy-use-content">
+                        <h2 class="privacy-policy-use-heading">HOW WE USE YOUR INFORMATION</h2>
+                        <ul class="privacy-policy-use-list">
+                            <li class="privacy-policy-use-item">To provide and maintain our services.</li>
+                            <li class="privacy-policy-use-item">To improve customer service and respond to user
+                                inquiries.</li>
+                            <li class="privacy-policy-use-item">To personalize user experience and improve our website.
+                            </li>
+                            <li class="privacy-policy-use-item">To send periodic emails regarding your order or other
+                                products and services.</li>
+                            <li class="privacy-policy-use-item">To process transactions and send you related
+                                information, including purchase confirmations and invoices.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: How We Protect Your Information -->
+            <div class="privacy-policy-protect">
+                <div class="privacy-policy-container">
+                    <div class="privacy-policy-protect-wrapper">
+                        <div class="privacy-policy-protect-text">
+                            <h2 class="privacy-policy-protect-heading">HOW WE PROTECT YOUR INFORMATION</h2>
+                            <p class="privacy-policy-protect-description">
+                                We adopt appropriate data collection, storage, and processing practices and security
+                                measures to protect against unauthorized access, alteration, disclosure, or destruction
+                                of your personal information, username, password, transaction information, and data
+                                stored on our site. Our security measures include encryption, secure servers, and
+                                regular security audits to ensure your data remains safe and confidential.
+                            </p>
+                        </div>
+                        <div class="privacy-policy-protect-image">
+                            <div class="privacy-policy-security-icons">
+                                <div class="privacy-policy-icon-item">INFORMATION PRIVACY</div>
+                                <div class="privacy-policy-icon-item">DATA PROTECTION</div>
+                                <div class="privacy-policy-icon-item privacy-policy-icon-lock">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M20 10C16.13 10 13 13.13 13 17V20C11.9 20 11 20.9 11 22V30C11 31.1 11.9 32 13 32H27C28.1 32 29 31.1 29 30V22C29 20.9 28.1 20 27 20V17C27 13.13 23.87 10 20 10ZM20 13C22.76 13 25 15.24 25 18V20H15V18C15 15.24 17.24 13 20 13ZM20 24C21.1 24 22 24.9 22 26C22 27.1 21.1 28 20 28C18.9 28 18 27.1 18 26C18 24.9 18.9 24 20 24Z"
+                                            fill="white" />
+                                    </svg>
+                                </div>
+                                <div class="privacy-policy-icon-item">NETWORK SECURITY</div>
+                                <div class="privacy-policy-icon-item">SECURED ACCESS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
     <!-- Footer -->
     <footer id="footer-section">
         <div id="footer-container">
             <div id="footer-about">
-                <h2 id="footer-logo">A&M Visa Consultants</h2>
+                <h2 id="footer-logo">smart Study Visa Consultants</h2>
                 <p id="footer-description">Your trusted partner for visa consultation and application services.</p>
                 <div id="footer-social-icons">
                     <a href="#" class="social-icon" title="Facebook">f</a>

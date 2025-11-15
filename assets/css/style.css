@@ -5,10 +5,9 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
 
 }
-
+/* REMOVE INHERIT COLOR (IMPORTANT) */
 a {
   text-decoration: none;
-  color: inherit;
 }
 
 /* ===== HEADER & NAVBAR ===== */
@@ -34,46 +33,59 @@ a {
   max-width: 1200px;
 }
 
-/* Single logo style */
+/* LOGO */
 .logo,
 .header .logo {
   font-weight: 700;
   font-size: 1.5rem;
-  color: #9f0808;
+  color: #9f0808 !important;
   letter-spacing: 2px;
-  text-decoration: none;
-  margin: 0;
-  padding: 0;
+  transition: color 0.3s ease;
 }
 
-/* Single nav-links style */
+.logo:hover,
+.header .logo:hover {
+  color: black !important;
+}
+
+/* NAV LINKS */
 .nav-links,
 .header .nav-links {
   display: flex;
+  justify-content: center;
   list-style: none;
   gap: 1.7rem;
   margin: 0;
   padding: 0;
 }
 
-/* Single nav link style */
+/* Desktop: show nav-links */
+@media (min-width: 993px) {
+  .nav-links {
+    display: flex !important;
+  }
+}
+
 .nav-links a,
 .header .nav-links a {
   font-weight: 600;
   font-size: 1rem;
-  color: #9f0808;
-  text-decoration: none;
-  transition: color 0.3s;
-  margin: 0;
-  padding: 0;
+  color: #9f0808 !important;
+  transition: color 0.3s ease;
 }
+
 
 .nav-links a:hover,
 .header .nav-links a:hover {
-  color: black;
+  color: black !important;
 }
 
-/* Button styling */
+/* ACTIVE NAV LINK */
+.nav-links a.active {
+  color: black !important;
+}
+
+/* BUTTON */
 .btn {
   padding: 0.5rem 1.5rem;
   border-radius: 40px;
@@ -104,7 +116,6 @@ a {
 .hero {
   background-color: #f8fafc;
   padding-top: 5%;
-  /* padding: 80px 5%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -241,6 +252,7 @@ a {
     max-width: 350px;
   }
 }
+
 
 
 /* Visa Section Styles */
@@ -1116,32 +1128,52 @@ a {
 
 /* NAV - mobile toggle */
 .nav-toggle {
-  display: none;
+  display: none; /* Hidden on desktop by default */
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 8px;
-  margin-left: 8px;
+  padding: 0;
+  margin-left: auto; /* Push to the right */
+  position: relative;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* hamburger base (single element with pseudo elements) */
-.nav-toggle .hamburger,
-.nav-toggle .hamburger::before,
-.nav-toggle .hamburger::after {
-  display: block;
+/* Desktop: hide nav-toggle */
+@media (min-width: 993px) {
+  .nav-toggle {
+    display: none !important;
+  }
+
+  .nav-links {
+    display: flex !important;
+  }
+}
+
+/* hamburger base - the span is the middle line, pseudo-elements are top and bottom */
+.nav-toggle .hamburger {
+  display: block !important;
   width: 26px;
   height: 2px;
-  background: #fff;
+  background: #9f0808 !important;
   border-radius: 2px;
   position: relative;
   transition: transform 420ms cubic-bezier(.2, .9, .2, 1), opacity 220ms ease, background 220ms ease;
+  flex-shrink: 0;
 }
 
+/* Top and bottom lines - pseudo elements positioned relative to middle line */
 .nav-toggle .hamburger::before,
 .nav-toggle .hamburger::after {
   content: "";
+  display: block !important;
   position: absolute;
   left: 0;
+  width: 26px;
+  height: 2px;
+  background: #9f0808 !important;
+  border-radius: 2px;
+  transition: transform 420ms cubic-bezier(.2, .9, .2, 1), opacity 220ms ease, background 220ms ease;
 }
 
 .nav-toggle .hamburger::before {
@@ -1154,15 +1186,21 @@ a {
 
 /* transform hamburger into X when nav-toggle has .is-open */
 .nav-toggle.is-open .hamburger {
-  background: transparent;
+  background: transparent !important;
 }
 
+/* Top line (::before) - moves from -8px to 0px (center), then rotates 45deg to form X */
 .nav-toggle.is-open .hamburger::before {
-  transform: translateY(8px) rotate(45deg);
+  top: 0 !important;
+  transform: translateY(0) rotate(45deg) !important;
+  transition: top 420ms cubic-bezier(.2, .9, .2, 1), transform 420ms cubic-bezier(.2, .9, .2, 1);
 }
 
+/* Bottom line (::after) - moves from 8px to 0px (center), then rotates -45deg to form X */
 .nav-toggle.is-open .hamburger::after {
-  transform: translateY(-8px) rotate(-45deg);
+  top: 0 !important;
+  transform: translateY(0) rotate(-45deg) !important;
+  transition: top 420ms cubic-bezier(.2, .9, .2, 1), transform 420ms cubic-bezier(.2, .9, .2, 1);
 }
 
 /* small screens: collapse nav links to a full-screen vertical menu with animation */
@@ -1188,7 +1226,6 @@ a {
     background: linear-gradient(180deg, rgba(12, 22, 50, 0.98) 0%, rgba(8, 12, 30, 0.98) 100%);
     backdrop-filter: blur(6px);
 
-    /* default open/close timing (open = faster) */
     transform: translateY(-100%);
     opacity: 0;
     pointer-events: none;
@@ -1233,12 +1270,33 @@ a {
   }
 
   .nav-toggle {
-    display: inline-flex;
+    display: inline-flex !important; /* Show on mobile/tablet */
     align-items: center;
+    justify-content: center;
     z-index: 2100;
     /* keep above the panel */
     background: transparent;
     border: none;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    flex-shrink: 0;
+    order: 2; /* Position after logo */
+  }
+
+  .navbar {
+    position: relative;
+  }
+
+  /* Ensure hamburger is visible on mobile */
+  .nav-toggle .hamburger,
+  .nav-toggle .hamburger::before,
+  .nav-toggle .hamburger::after {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: #9f0808 !important;
   }
 
   .apply-now-btn {
@@ -1811,24 +1869,95 @@ button:focus {
   background: #9f0808 !important;
 }
 
-/* On mobile when panel appears, keep hamburger and menu links white for contrast */
+/* On mobile when panel appears, keep nav links white for contrast */
 @media (max-width: 992px) {
 
-  .nav-toggle .hamburger,
+  .nav-toggle {
+    display: inline-flex !important; /* Force visibility on mobile/tablet */
+  }
+
+  /* Force hamburger visibility on mobile/tablet - ensure all 3 lines show */
+  .nav-toggle .hamburger {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: #9f0808 !important;
+    width: 26px !important;
+    height: 2px !important;
+    position: relative !important;
+  }
+
   .nav-toggle .hamburger::before,
   .nav-toggle .hamburger::after {
-    background: #fff !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: #9f0808 !important;
+    width: 26px !important;
+    height: 2px !important;
+    content: "" !important;
+  }
+
+  .nav-toggle .hamburger::before {
+    top: -8px !important;
+  }
+
+  .nav-toggle .hamburger::after {
+    top: 8px !important;
   }
 
   .nav-links a {
     color: #fff !important;
   }
+
+  /* Hide desktop nav links on mobile */
+  .nav-links:not(.open) {
+    display: none !important;
+  }
 }
 
-/* When nav-toggle is open, ensure X lines remain visible */
+/* When nav-toggle is open, ensure X lines remain visible and properly positioned */
 .nav-toggle.is-open .hamburger::before,
 .nav-toggle.is-open .hamburger::after {
-  background: #fff !important;
+  background: #9f0808 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 26px !important;
+  height: 2px !important;
+  position: absolute !important;
+  left: 0 !important;
+}
+
+/* Mobile/tablet: Ensure X is visible when menu is open */
+@media (max-width: 992px) {
+  .nav-toggle.is-open .hamburger {
+    background: transparent !important;
+  }
+
+  .nav-toggle.is-open .hamburger::before {
+    top: 0 !important;
+    transform: rotate(45deg) !important;
+    background: #9f0808 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .nav-toggle.is-open .hamburger::after {
+    top: 0 !important;
+    transform: rotate(-45deg) !important;
+    background: #9f0808 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+.header .nav-toggle {
+    /* display controlled by media queries - hidden on desktop, visible on mobile */
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 /* Navbar - Blog Detail Page Override */
@@ -1836,7 +1965,7 @@ button:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 0;
+    padding: 1rem 10px;
 }
 
 .header .logo {
@@ -1857,19 +1986,20 @@ button:focus {
 }
 
 .header .nav-links a {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1 rem;
+    font-weight: 700;
     text-decoration: none;
     color: #333;
     margin: 0;
     padding: 0;
 }
 
+/* Let global .nav-toggle rules control display; do not hide it here */
 .header .nav-toggle {
-    display: none;
     background: none;
     border: none;
     cursor: pointer;
+    /* Display is controlled by media queries */
 }
 
 .header .apply-now-btn {
@@ -1883,4 +2013,63 @@ button:focus {
 .header {
     font-size: unset;
     line-height: unset;
+}
+
+
+
+
+
+/* video model  */
+
+/* Modal Background */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,0.7);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 9999;
+}
+
+/* When Modal Active */
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Box Animation */
+.modal-content {
+  background: #ffffff;
+  width: 90%;
+  max-width: 600px;
+  padding: 50px 10px 10px 10px ;
+  border-radius: 10px;
+  position: relative;
+
+  transform: scale(0.7);
+  transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+  transform: scale(1);
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  right: 15px;
+  top: 5px;
+  font-size: 25px;
+  cursor: pointer;
 }

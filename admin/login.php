@@ -55,7 +55,7 @@ $conn->close();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
         rel="stylesheet">
-    <title>Admin Login - A&M Visa Consultants</title>
+    <title>Admin Login - smart Study Visa Consultants</title>
     <style>
         * {
             margin: 0;
@@ -208,9 +208,9 @@ $conn->close();
             <button type="submit" class="login-btn">Login to Dashboard</button>
         </form>
 
-        <div class="login-footer">
+        <!-- <div class="login-footer">
             Test Account: <strong>admin@SmartStudy.com</strong> | Password: <strong>admin123</strong>
-        </div>
+        </div> -->
     </div>
 
 </body>

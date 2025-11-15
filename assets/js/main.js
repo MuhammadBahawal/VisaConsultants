@@ -61,3 +61,33 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!clickedInside) closeMenu();
   });
 });
+
+
+
+
+// video mode js 
+const openBtn = document.getElementById("openVideoBtn");
+const modal = document.getElementById("videoModal");
+const closeBtn = document.getElementById("closeModal");
+const youtubeFrame = document.getElementById("youtubeFrame");
+
+// 👉 Your YouTube Video Link
+const videoURL = "https://www.youtube.com/embed/YOUR_VIDEO_ID";
+
+openBtn.addEventListener("click", () => {
+  modal.classList.add("active");
+  youtubeFrame.src = videoURL + "?autoplay=1";
+});
+
+closeBtn.addEventListener("click", closeModalFunc);
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) closeModalFunc();
+});
+
+function closeModalFunc() {
+  modal.classList.remove("active");
+  setTimeout(() => {
+    youtubeFrame.src = "";
+  }, 300); // removes video after close animation
+}

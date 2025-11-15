@@ -26,6 +26,17 @@ CREATE TABLE IF NOT EXISTS blogs (
     FOREIGN KEY (author_id) REFERENCES users(id)
 );
 
+-- Contacts table
+CREATE TABLE IF NOT EXISTS contacts (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    phone VARCHAR(50) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Insert sample admin user (password: admin123)
 -- Replace the placeholder below with a real bcrypt hash generated locally.
 -- Generate hash locally with: php -r "echo password_hash('admin123', PASSWORD_BCRYPT).PHP_EOL;"

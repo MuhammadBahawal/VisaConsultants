@@ -20,7 +20,7 @@ async function loadBlogDetail() {
             return;
         }
 
-        document.title = blog.title + ' — A&M Visa Consultants';
+        document.title = blog.title + ' — smart Study Visa Consultants';
 
         const imageHtml = blog.image_url ? `<div class="blog-detail-image"><img src="${escapeHtml(blog.image_url)}" alt="${escapeHtml(blog.title)}"></div>` : '';
         const date = blog.created_at ? new Date(blog.created_at).toLocaleDateString() : '';
