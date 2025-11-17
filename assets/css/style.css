@@ -542,12 +542,14 @@ a {
 .visa-section {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 1200px;
-  margin: 0 auto;
-  /* padding-top: %; */
+  margin: 10 auto;
+  /* padding-top: 10%; */
   background-color: #f8f9fa;
 }
 
 .visa-section__header {
+
+  padding-top: 5%;
   text-align: center;
   margin-bottom: 50px;
 }
@@ -592,7 +594,7 @@ a {
 
 .visa-section__card-title {
   font-size: 1.8rem;
-  color: #3498db;
+  color: #b91c1c;
   margin-bottom: 15px;
   font-weight: 600;
 }
@@ -605,7 +607,7 @@ a {
 
 .visa-section__button {
   display: inline-block;
-  background-color: #3498db;
+  background-color: #b91c1c;
   color: white;
   padding: 12px 25px;
   border-radius: 5px;
@@ -615,7 +617,8 @@ a {
 }
 
 .visa-section__button:hover {
-  background-color: #2980b9;
+  background-color: rgba(203, 67, 67, 0.516);
+  color: black;
 }
 
 .visa-section__about-link {
@@ -624,7 +627,7 @@ a {
 }
 
 .visa-section__about-link a {
-  color: #3498db;
+  color: #b91c1c;
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1rem;
@@ -632,8 +635,9 @@ a {
 }
 
 .visa-section__about-link a:hover {
-  color: #2980b9;
+  color: #2a1212;
   text-decoration: underline;
+  
 }
 
 /* Responsive Design */
@@ -685,7 +689,7 @@ a {
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background-color: #3498db;
+  background-color: #b91c1c;
   border-radius: 2px;
 }
 
@@ -707,7 +711,7 @@ a {
   max-width: 500px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
-  border-top: 5px solid #3498db;
+  border-top: 5px solid #b91c1c;
   position: relative;
   overflow: hidden;
   min-height: 400px;
@@ -762,7 +766,7 @@ a {
   display: inline-block;
   width: 4px;
   height: 4px;
-  background-color: #3498db;
+  background-color: #b91c1c;
   border-radius: 50%;
   margin-right: 10px;
 }
@@ -779,7 +783,7 @@ a {
 .visa-services__card-button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #3498db;
+  background-color: #db3434;
   color: #fff;
   border-radius: 6px;
   font-weight: 600;
@@ -790,7 +794,7 @@ a {
 }
 
 .visa-services__card-button:hover {
-  background-color: #2980b9;
+  background-color: #b92929;
   transform: scale(1.05);
 }
 
@@ -966,7 +970,8 @@ a {
 .coaching-image-wrapper {
   position: relative;
   flex: 1 1 320px;
-  max-width: 450px;
+  /* max-width: 450px; */
+  width: 100%;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -1053,6 +1058,9 @@ a {
     flex-direction: column;
     align-items: center;
     gap: 30px;
+  }
+  .coaching-image{
+    width: 100%;
   }
 
   .coaching-content {
@@ -1401,10 +1409,10 @@ a {
 #achievement-section {
   width: 100%;
   max-width: 1200px;
-  margin-left: auto;
+  /* margin-left: auto;
   margin-right: auto;
   padding-left: 16px;
-  padding-right: 16px;
+  padding-right: 16px; */
 }
 
 /* very small screens: ensure full width, adjust padding */
