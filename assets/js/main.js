@@ -147,3 +147,23 @@ function closeModalFunc() {
                 });
             });
         });
+
+
+
+
+
+
+        // carousil js starts 
+
+
+        const carousel = document.querySelector('.carousel');
+const leftArrow = document.querySelector('.left-arrow');
+const rightArrow = document.querySelector('.right-arrow');
+
+leftArrow.addEventListener('click', () => {
+  carousel.scrollBy({ left: -300, behavior: 'smooth' });
+});
+
+rightArrow.addEventListener('click', () => {
+  carousel.scrollBy({ left: 300, behavior: 'smooth' });
+});

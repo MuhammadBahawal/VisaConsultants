@@ -1,3 +1,200 @@
+ /* carousil styling start */
+/* Container wrapper */
+.destination-section {
+  padding: 40px 20px;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header Styles */
+.destination-header .subtitle {
+  color: #0056ff;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.destination-header .title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.destination-header .description {
+  font-size: 16px;
+  color: #4a4a4a;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+/* Carousel Container */
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Carousel Scrollable Area */
+.carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  width: 100%;
+}
+
+/* Hide scrollbar for all browsers */
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+.carousel {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Carousel item */
+.carousel-item {
+  min-width: 280px;
+  flex: 0 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+
+.carousel-item .caption {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Hover effect */
+.carousel-item:hover {
+  transform: scale(1.05);
+}
+
+/* Carousel Navigation Arrows */
+.carousel-arrow {
+  background-color: #0056ff;
+  border: none;
+  color: white;
+  font-size: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  background-color: #003bb5;
+}
+
+.left-arrow {
+  margin-right: 10px;
+}
+
+.right-arrow {
+  margin-left: 10px;
+}
+
+/* Responsive Queries */
+
+/* Tablets */
+@media (max-width: 991px) {
+  .destination-header .title {
+    font-size: 24px;
+  }
+  
+  .carousel-item {
+    min-width: 220px;
+  }
+
+  .carousel-item img {
+    height: 140px;
+  }
+}
+
+/* Large Mobile / Landscape phones */
+@media (max-width: 640px) {
+  .destination-header .title {
+    font-size: 20px;
+  }
+  
+  .carousel-item {
+    min-width: 180px;
+  }
+  
+  .carousel-item img {
+    height: 120px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 400px) {
+  .destination-header .title {
+    font-size: 18px;
+  }
+  
+  .description {
+    font-size: 14px;
+  }
+  
+  .carousel-item {
+    min-width: 140px;
+  }
+  
+  .carousel-item img {
+    height: 90px;
+  }
+  
+  .carousel-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+
+
+ /* carousil styling end  */
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
  .faq-section {
    max-width: 1200px;
    margin: 0 auto;
