@@ -148,11 +148,6 @@ function closeModalFunc() {
             });
         });
 
-
-
-
-
-
         // carousil js starts 
 
 
