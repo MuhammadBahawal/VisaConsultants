@@ -47,6 +47,18 @@ INSERT INTO users (username, email, password) VALUES
 -- Or after importing run (replace <HASH> with generated hash):
 -- UPDATE users SET password = '<HASH>' WHERE email = 'ahsan@gmail.com';
 
+-- YouTube Videos table
+CREATE TABLE IF NOT EXISTS youtube_videos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    youtube_url VARCHAR(500) NOT NULL,
+    thumbnail_url VARCHAR(500),
+    is_active BOOLEAN DEFAULT 1,
+    display_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 -- Insert sample blogs
 INSERT INTO blogs (title, slug, category, image_url, short_description, content, author_id) VALUES
 ('ANSO Scholarship In China For Pakistani Students 2026', 'anso-scholarship-china-2026', 'Scholarship', 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop', 'Explore ANSO Scholarship opportunities in China for Pakistani students.', 'Complete guide about ANSO Scholarship in China for Pakistani students in 2026...', 1),
