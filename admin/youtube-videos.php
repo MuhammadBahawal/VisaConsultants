@@ -193,6 +193,38 @@ $conn->close();
         #addVideoModal.flex div[class*="bg-white"], #editVideoModal.flex div[class*="bg-white"] {
             transform: scale(1);
         }
+        
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .animate-shimmer {
+            animation: shimmer 3s infinite;
+        }
+        
+        /* Custom scrollbar for modal */
+        #addVideoModal div[style*="overflow-y: auto"]::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        #addVideoModal div[style*="overflow-y: auto"]::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        #addVideoModal div[style*="overflow-y: auto"]::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #ef4444, #ec4899);
+            border-radius: 10px;
+        }
+        
+        #addVideoModal div[style*="overflow-y: auto"]::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #dc2626, #db2777);
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -300,121 +332,145 @@ $conn->close();
     </main>
 
     <!-- Add Video Modal -->
-    <div id="addVideoModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm hidden items-center justify-center px-4 z-50 transition-opacity duration-300">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl transform transition-all duration-300 scale-95" style="max-height: 90vh; overflow-y: auto;">
-            <!-- Modal Header with Gradient -->
-            <div class="bg-gradient-to-r from-red-600 via-red-500 to-pink-500 rounded-t-2xl px-6 py-5 relative">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                            <i class="fa-brands fa-youtube text-white text-2xl"></i>
+    <div id="addVideoModal" class="fixed inset-0 bg-gradient-to-br from-black/70 via-purple-900/40 to-black/70 backdrop-blur-md hidden items-center justify-center px-4 z-50 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-3xl transform transition-all duration-500 scale-95 relative overflow-hidden" style="max-height: 95vh; overflow-y: auto;">
+            <!-- Animated Background Pattern -->
+            <div class="absolute inset-0 opacity-5 pointer-events-none">
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-red-500 via-pink-500 to-purple-500"></div>
+                <div class="absolute top-0 right-0 w-96 h-96 bg-red-400 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                <div class="absolute bottom-0 left-0 w-96 h-96 bg-pink-400 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+            </div>
+            
+            <!-- Modal Header with Enhanced Gradient -->
+            <div class="relative bg-gradient-to-r from-red-600 via-red-500 via-pink-500 to-purple-500 rounded-t-3xl px-8 py-6 overflow-hidden">
+                <!-- Animated shimmer effect -->
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-shimmer"></div>
+                
+                <div class="relative flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-white/30 rounded-2xl blur-xl"></div>
+                            <div class="relative w-16 h-16 bg-white/25 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/30 shadow-lg">
+                                <i class="fa-brands fa-youtube text-white text-3xl drop-shadow-lg"></i>
+                            </div>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold text-white">Add YouTube Video</h3>
-                            <p class="text-red-100 text-sm mt-0.5">Add a new video to your carousel</p>
+                            <h3 class="text-3xl font-extrabold text-white drop-shadow-lg tracking-tight">Add YouTube Video</h3>
+                            <p class="text-white/90 text-sm mt-1 font-medium">Enhance your carousel with engaging content</p>
                         </div>
                     </div>
-                    <button type="button" class="w-10 h-10 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full flex items-center justify-center text-white transition-all duration-200 backdrop-blur-sm" data-close-modal>
-                        <i class="fa-solid fa-xmark text-lg"></i>
+                    <button type="button" class="group relative w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-xl flex items-center justify-center text-white transition-all duration-300 border border-white/30 hover:scale-110 hover:rotate-90 shadow-lg" data-close-modal>
+                        <i class="fa-solid fa-xmark text-xl group-hover:scale-110 transition-transform"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Modal Body -->
-            <form method="POST" class="p-6 space-y-6">
+            <form method="POST" class="relative p-8 space-y-6 bg-gradient-to-b from-white to-gray-50/50">
                 <input type="hidden" name="action" value="add_video">
                 
                 <!-- YouTube URL Input -->
-                <div class="space-y-2">
-                    <label class="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                        <i class="fa-solid fa-link text-red-500"></i>
+                <div class="space-y-3 group">
+                    <label class="flex items-center gap-2 text-sm font-bold text-gray-800 uppercase tracking-wide">
+                        <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-pink-500 rounded-lg flex items-center justify-center shadow-md">
+                            <i class="fa-solid fa-link text-white text-xs"></i>
+                        </div>
                         YouTube URL or Video ID
-                        <span class="text-red-500">*</span>
+                        <span class="text-red-500 text-lg">*</span>
                     </label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <i class="fa-brands fa-youtube text-gray-400"></i>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none z-10">
+                            <i class="fa-brands fa-youtube text-red-500 text-xl group-focus-within:text-red-600 transition-colors"></i>
                         </div>
                         <input type="text" name="video_input" required 
-                            placeholder="https://www.youtube.com/watch?v=XXXX or just the video ID"
-                            class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all duration-200 outline-none text-gray-700 placeholder-gray-400">
+                            placeholder="Paste YouTube URL or video ID here..."
+                            class="w-full pl-14 pr-5 py-4 border-2 border-gray-200 rounded-2xl focus:border-red-500 focus:ring-4 focus:ring-red-100 bg-white transition-all duration-300 outline-none text-gray-800 placeholder-gray-400 shadow-sm hover:shadow-md focus:shadow-lg font-medium">
+                        <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-red-500/0 via-red-500/5 to-pink-500/0 opacity-0 group-focus-within:opacity-100 transition-opacity pointer-events-none"></div>
                     </div>
-                    <p class="text-xs text-gray-500 flex items-center gap-1">
-                        <i class="fa-solid fa-info-circle"></i>
-                        You can paste a full YouTube URL or just the video ID
-                    </p>
+                    <div class="flex items-start gap-2 bg-blue-50 border border-blue-200 rounded-xl p-3">
+                        <i class="fa-solid fa-info-circle text-blue-500 mt-0.5"></i>
+                        <p class="text-xs text-blue-700 font-medium">You can paste a full YouTube URL (e.g., https://youtube.com/watch?v=...) or just the video ID</p>
+                    </div>
                 </div>
 
                 <!-- Custom Title Input -->
-                <div class="space-y-2">
-                    <label class="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                        <i class="fa-solid fa-heading text-red-500"></i>
+                <div class="space-y-3 group">
+                    <label class="flex items-center gap-2 text-sm font-bold text-gray-800 uppercase tracking-wide">
+                        <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-md">
+                            <i class="fa-solid fa-heading text-white text-xs"></i>
+                        </div>
                         Custom Title
-                        <span class="text-xs font-normal text-gray-500">(optional)</span>
+                        <span class="text-xs font-normal text-gray-500 normal-case ml-2">(optional)</span>
                     </label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <i class="fa-solid fa-pen text-gray-400"></i>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none z-10">
+                            <i class="fa-solid fa-pen text-purple-500 text-lg group-focus-within:text-purple-600 transition-colors"></i>
                         </div>
                         <input type="text" name="custom_title" 
-                            placeholder="Leave blank to auto-fetch from YouTube"
-                            class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all duration-200 outline-none text-gray-700 placeholder-gray-400">
+                            placeholder="Enter a custom title or leave blank to auto-fetch..."
+                            class="w-full pl-14 pr-5 py-4 border-2 border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 bg-white transition-all duration-300 outline-none text-gray-800 placeholder-gray-400 shadow-sm hover:shadow-md focus:shadow-lg font-medium">
+                        <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-pink-500/0 opacity-0 group-focus-within:opacity-100 transition-opacity pointer-events-none"></div>
                     </div>
-                    <p class="text-xs text-gray-500 flex items-center gap-1">
-                        <i class="fa-solid fa-magic"></i>
-                        We'll automatically fetch the official title if left empty
-                    </p>
+                    <div class="flex items-start gap-2 bg-purple-50 border border-purple-200 rounded-xl p-3">
+                        <i class="fa-solid fa-magic text-purple-500 mt-0.5"></i>
+                        <p class="text-xs text-purple-700 font-medium">We'll automatically fetch the official YouTube title if you leave this blank</p>
+                    </div>
                 </div>
 
                 <!-- Display Order and Status Grid -->
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="space-y-2">
-                        <label class="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                            <i class="fa-solid fa-sort-numeric-up text-red-500"></i>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-3 group">
+                        <label class="flex items-center gap-2 text-sm font-bold text-gray-800 uppercase tracking-wide">
+                            <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-lg flex items-center justify-center shadow-md">
+                                <i class="fa-solid fa-sort-numeric-up text-white text-xs"></i>
+                            </div>
                             Display Order
                         </label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <i class="fa-solid fa-hashtag text-gray-400"></i>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none z-10">
+                                <i class="fa-solid fa-hashtag text-indigo-500 text-lg group-focus-within:text-indigo-600 transition-colors"></i>
                             </div>
                             <input type="number" name="display_order" min="0" value="0"
-                                class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all duration-200 outline-none text-gray-700">
+                                class="w-full pl-14 pr-5 py-4 border-2 border-gray-200 rounded-2xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 bg-white transition-all duration-300 outline-none text-gray-800 shadow-sm hover:shadow-md focus:shadow-lg font-semibold">
                         </div>
-                        <p class="text-xs text-gray-500">Lower numbers appear first</p>
+                        <p class="text-xs text-gray-600 font-medium">Lower numbers will appear first in the carousel</p>
                     </div>
-                    <div class="space-y-2">
-                        <label class="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                            <i class="fa-solid fa-eye text-red-500"></i>
+                    <div class="space-y-3 group">
+                        <label class="flex items-center gap-2 text-sm font-bold text-gray-800 uppercase tracking-wide">
+                            <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center shadow-md">
+                                <i class="fa-solid fa-eye text-white text-xs"></i>
+                            </div>
                             Visibility Status
                         </label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <i class="fa-solid fa-toggle-on text-gray-400"></i>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none z-10">
+                                <i class="fa-solid fa-toggle-on text-green-500 text-lg"></i>
                             </div>
-                            <select name="is_active" class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-2 focus:ring-red-100 transition-all duration-200 outline-none text-gray-700 appearance-none bg-white">
+                            <select name="is_active" class="w-full pl-14 pr-12 py-4 border-2 border-gray-200 rounded-2xl focus:border-green-500 focus:ring-4 focus:ring-green-100 bg-white transition-all duration-300 outline-none text-gray-800 appearance-none shadow-sm hover:shadow-md focus:shadow-lg font-semibold cursor-pointer">
                                 <option value="1" selected>Visible</option>
                                 <option value="0">Hidden</option>
                             </select>
-                            <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                                <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                            <div class="absolute inset-y-0 right-0 pr-5 flex items-center pointer-events-none z-10">
+                                <i class="fa-solid fa-chevron-down text-gray-400 text-sm"></i>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-500">Control video visibility</p>
+                        <p class="text-xs text-gray-600 font-medium">Control whether the video appears on your site</p>
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row justify-end gap-4 pt-6 border-t-2 border-gray-200 mt-8">
                     <button type="button" 
-                        class="px-6 py-3 rounded-xl border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 flex items-center gap-2"
+                        class="group px-8 py-4 rounded-2xl border-2 border-gray-300 text-gray-700 font-bold hover:bg-gray-50 hover:border-gray-400 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 uppercase tracking-wide text-sm"
                         data-close-modal>
-                        <i class="fa-solid fa-times"></i>
+                        <i class="fa-solid fa-times group-hover:rotate-90 transition-transform"></i>
                         Cancel
                     </button>
                     <button type="submit" 
-                        class="px-6 py-3 rounded-xl bg-gradient-to-r from-red-600 to-pink-500 text-white font-semibold hover:from-red-700 hover:to-pink-600 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2">
-                        <i class="fa-solid fa-plus-circle"></i>
-                        Add Video
+                        class="group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-red-600 via-pink-500 to-purple-500 text-white font-bold hover:from-red-700 hover:via-pink-600 hover:to-purple-600 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 uppercase tracking-wide text-sm overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                        <i class="fa-solid fa-plus-circle relative z-10 text-lg group-hover:rotate-180 transition-transform duration-500"></i>
+                        <span class="relative z-10">Add Video</span>
                     </button>
                 </div>
             </form>
