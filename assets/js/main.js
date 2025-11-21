@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Update on resize
   let resizeTimer;
-  window.addEventListener('resize', function() {
+  window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(moveApplyButtonToMenu, 100);
   });
@@ -128,37 +128,38 @@ function closeModalFunc() {
 
 
 // faq section 
-  document.addEventListener('DOMContentLoaded', function() {
-            const faqItems = document.querySelectorAll('.faq-item');
-            
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                
-                question.addEventListener('click', () => {
-                    // Close all other FAQ items
-                    faqItems.forEach(otherItem => {
-                        if (otherItem !== item) {
-                            otherItem.classList.remove('active');
-                        }
-                    });
-                    
-                    // Toggle current FAQ item
-                    item.classList.toggle('active');
-                });
-            });
-        });
+document.addEventListener('DOMContentLoaded', function () {
+  const faqItems = document.querySelectorAll('.faq-item');
 
-        // carousil js starts 
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
 
+    question.addEventListener('click', () => {
+      // Close all other FAQ items
+      faqItems.forEach(otherItem => {
+        if (otherItem !== item) {
+          otherItem.classList.remove('active');
+        }
+      });
 
-        const carousel = document.querySelector('.carousel');
+      // Toggle current FAQ item
+      item.classList.toggle('active');
+    });
+  });
+});
+
+// carousil js starts 
+
+const carousel = document.querySelector('.carousel');
 const leftArrow = document.querySelector('.left-arrow');
 const rightArrow = document.querySelector('.right-arrow');
 
-leftArrow.addEventListener('click', () => {
-  carousel.scrollBy({ left: -300, behavior: 'smooth' });
-});
+if (leftArrow && rightArrow && carousel) {
+  leftArrow.addEventListener('click', () => {
+    carousel.scrollBy({ left: -300, behavior: 'smooth' });
+  });
 
-rightArrow.addEventListener('click', () => {
-  carousel.scrollBy({ left: 300, behavior: 'smooth' });
-});
+  rightArrow.addEventListener('click', () => {
+    carousel.scrollBy({ left: 300, behavior: 'smooth' });
+  });
+}

@@ -38,6 +38,18 @@ if ($resultContacts && $resultContacts->num_rows > 0) {
         $contacts[] = $row;
     }
 }
+// Get subscribed emails
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+
+$sqlSubscriptions = "SELECT * FROM subscriptions ORDER BY subscribed_at DESC";
+$resultSubscriptions = $conn->query($sqlSubscriptions);
+$subscriptions = [];
+if ($resultSubscriptions && $resultSubscriptions->num_rows > 0) {
+    while ($row = $resultSubscriptions->fetch_assoc()) {
+        $subscriptions[] = $row;
+    }
+}
 
 $conn->close();
 ?>
@@ -393,9 +405,51 @@ $conn->close();
                         <p>No contact messages found yet.</p>
                     </div>
                 <?php endif; ?>
+
             </div>
+            <h2 class="dashboard-title" style="margin-top: 30px;">Email Subscriptions</h2>
+<div class="blogs-table">
+    <?php if (!empty($subscriptions)): ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Subscribed At</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($subscriptions as $sub): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($sub['email']); ?></td>
+                        <td><?php echo htmlspecialchars($sub['subscribed_at']); ?></td>
+                        <td>
+                            <a href="delete-subscription.php?id=<?php echo $sub['id']; ?>" 
+                               class="delete-btn" 
+                               onclick="return confirm('Are you sure you want to delete this subscription?');">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <div class="empty-state">
+            <p>No subscriptions found yet.</p>
+        </div>
+    <?php endif; ?>
+</div>
+
+<button onclick="window.location.href='download-subscriptions.php';" 
+        class="add-blog-btn" 
+        style="background:#2196F3; margin-bottom: 20px;">
+    Download Subscriptions
+</button>
+
         </main>
     </div>
+
 
 </body>
 </html>

@@ -117,38 +117,99 @@
     </section> -->
 
     <section id="destination-section" class="destination-section">
-  <div class="container">
-    <div class="destination-header">
-      <h5 class="subtitle">FAVOURITE DESTINATION</h5>
-      <h2 class="title">Popular Destinations For International Students</h2>
-      <p class="description">
-        Are you ready to launch the next phase of your academic as well as professional growth? Is quality education in distinguished universities around the world your ultimate dream? If yes, sit back and let us take the wheel!
-      </p>
-    </div>
+      <div class="container">
+        <div class="destination-header">
+          <h5 class="subtitle">FAVOURITE DESTINATION</h5>
+          <h2 class="title">Popular Destinations For International Students</h2>
+          <p class="description">
+            Are you ready to launch the next phase of your academic as well as professional growth?
+            If yes, sit back and let us take the wheel!
+          </p>
+        </div>
 
-    <div class="carousel-container">
-      <button class="carousel-arrow left-arrow" aria-label="Previous">&#8592;</button>
-      
-      <div class="carousel">
-        <div class="carousel-item">
-          <img src="canada.jpg" alt="Study in Canada" />
-          <p class="caption">Study in Canada</p>
+        <div class="carousel-container">
+          <button class="carousel-arrow left-arrow" aria-label="Previous">&#8592;</button>
+
+          <div class="carousel">
+
+            <!-- Canada -->
+            <div class="carousel-item">
+              <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcT8SjvDGJctzKNOo0VvkUF0GhvD9MsQbKysV0hyj7FnZ2iuoVu_LqxFSyJ9AUbYG97xk5kjARtNK0DgDuqCJ_Hbclk&s=19"
+                alt="Study in Canada" />
+              <p class="caption">Study in Canada</p>
+            </div>
+
+            <!-- United Kingdom -->
+            <div class="carousel-item">
+              <img src="https://cdn.pixabay.com/photo/2016/11/29/02/12/architecture-1866767_1280.jpg"
+                alt="Study in UK" />
+              <p class="caption">Study in United Kingdom</p>
+            </div>
+
+            <!-- United States -->
+            <div class="carousel-item">
+              <img src="https://images.unsplash.com/photo-1664995120738-edf0081461c8?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Study in USA" />
+              <p class="caption">Study in USA</p>
+            </div>
+
+            <!-- Australia -->
+            <div class="carousel-item">
+              <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcT1cXFE5EVABSCO6vmQrN65NsU75KB6xYhDyMNbRZJWeMqOB3jf5iz5wO5In3DpinewVev13el5tblxS0xdaBZnIUc&s=19"
+                alt="Study in Australia" />
+              <p class="caption">Study in Australia</p>
+            </div>
+
+            <!-- Germany -->
+            <div class="carousel-item">
+              <img src="https://cdn.pixabay.com/photo/2023/12/04/16/12/berlin-8429780_1280.jpg"
+                alt="Study in Germany" />
+              <p class="caption">Study in Germany</p>
+            </div>
+
+            <!-- China -->
+            <div class="carousel-item">
+              <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=900&q=60"
+                alt="Study in China" />
+              <p class="caption">Study in China</p>
+            </div>
+
+            <!-- Turkey -->
+            <div class="carousel-item">
+              <img src="https://cdn.pixabay.com/photo/2019/12/15/12/07/turkey-4696967_1280.jpg"
+                alt="Study in Turkey" />
+              <p class="caption">Study in Turkey</p>
+            </div>
+
+            <!-- Malaysia -->
+            <div class="carousel-item">
+              <img src="http://cdn.pixabay.com/photo/2016/03/27/17/09/kuala-lumpur-1283140_1280.jpg"
+                alt="Study in Malaysia" />
+              <p class="caption">Study in Malaysia</p>
+            </div>
+
+            <!-- Italy -->
+            <div class="carousel-item">
+              <img src="http://cdn.pixabay.com/photo/2014/11/05/14/56/colosseum-517987_1280.jpg"
+                alt="Study in Italy" />
+              <p class="caption">Study in Italy</p>
+            </div>
+
+            <!-- France -->
+            <div class="carousel-item">
+              <img src="https://media.architecturaldigest.com/photos/66a951edce728792a48166e6/16:9/w_1920,c_limit/GettyImages-955441104.jpg"
+                alt="Study in France" />
+              <p class="caption">Study in France</p>
+            </div>
+
+          </div>
+
+          <button class="carousel-arrow right-arrow" aria-label="Next">&#8594;</button>
         </div>
-        <div class="carousel-item">
-          <img src="australia.jpg" alt="Study in Australia" />
-          <p class="caption">Study in Australia</p>
-        </div>
-        <div class="carousel-item">
-          <img src="germany.jpg" alt="Study in Germany" />
-          <p class="caption">Study in Germany</p>
-        </div>
-        <!-- Add more carousel items as required -->
       </div>
+    </section>
 
-      <button class="carousel-arrow right-arrow" aria-label="Next">&#8594;</button>
-    </div>
-  </div>
-</section>
+
 
 
 
@@ -583,7 +644,19 @@
   </section>
 
   <!-- faq end  -->
-
+<section class="subscribe-section">
+    <div class="subscribe-left">
+        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Island and sea plane" />
+    </div>
+    <div class="subscribe-right">
+        <h2>Get special offers, and more from Edify</h2>
+        <p>Subscribe to see secret scholarships, drop the moment you sign up!</p>
+        <form action="./admin/subscribe.php" method="POST" class="subscribe-form">
+            <input type="email" name="email" placeholder="Email Address" required />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</section>
 
   <footer id="footer-section">
     <div id="footer-container">
