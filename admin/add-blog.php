@@ -23,10 +23,15 @@ $blog = null;
 if (isset($_GET['id'])) {
     $isEdit = true;
     $id = (int)$_GET['id'];
-    $sql = "SELECT * FROM blogs WHERE id = $id";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        $blog = $result->fetch_assoc();
+    $stmt = $conn->prepare("SELECT * FROM blogs WHERE id = ?");
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $blog = $result->fetch_assoc();
+        }
+        $stmt->close();
     }
 }
 

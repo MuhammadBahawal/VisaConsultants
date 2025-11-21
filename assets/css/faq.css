@@ -466,171 +466,206 @@
 
 /* YouTube video carousel section */
 .youtube-section {
-  padding: 80px 20px;
-  background: #f9fafb;
+  padding: 80px 0;
+  background: #030712;
+  color: #fff;
 }
 
 .youtube-section-inner {
-  max-width: 1200px;
-  margin: 0 auto 40px auto;
+  max-width: 1100px;
+  margin: 0 auto 40px;
   text-align: center;
+  padding: 0 20px;
 }
 
 .youtube-badge {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #2563eb;
-  margin-bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f87171;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+}
+
+.youtube-badge::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f87171;
+  box-shadow: 0 0 12px rgba(248, 113, 113, 0.6);
 }
 
 .youtube-title {
-  font-size: 32px;
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
-  color: #111827;
+  margin-top: 18px;
+  margin-bottom: 12px;
+  color: #f9fafb;
 }
 
-@media (max-width: 640px) {
-  .youtube-title {
-    font-size: 24px;
-  }
+.youtube-lede {
+  max-width: 720px;
+  margin: 0.5rem auto 0;
+  color: rgba(249, 250, 251, 0.75);
+  line-height: 1.6;
 }
 
 .youtube-carousel-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 18px;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
   position: relative;
 }
 
-#videoCarousel {
+.yt-arrow {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  z-index: 2;
+}
+
+.yt-arrow:hover {
+  background: #f87171;
+  transform: translateY(-2px);
+}
+
+#videoCarousel {
+  overflow: hidden;
+  flex: 1;
 }
 
 #videoCarouselInner {
   display: flex;
-  width: 100%;
-  overflow: hidden;
-  transition: transform 0.5s ease-in-out;
+  gap: 24px;
+  will-change: transform;
+  transition: transform 0.6s ease;
+  --videos-per-view: 1;
 }
 
 .video-carousel-item {
-  flex: 0 0 100%;
-  padding: 0 12px;
-  box-sizing: border-box;
+  flex: 0 0 calc(100% / var(--videos-per-view));
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-@media (min-width: 768px) {
-  .video-carousel-item {
-    flex: 0 0 50%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .video-carousel-item {
-    flex: 0 0 33.3333%;
-  }
-}
-
-.video-container {
+.video-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
   position: relative;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 */
-  border-radius: 18px;
   overflow: hidden;
-  background: #000;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.45);
+  box-shadow: 0 20px 45px rgba(3, 7, 18, 0.35);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.video-container iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.video-container::before {
+.video-thumb::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.55));
-  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.45));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.video-container::after {
-  content: "\25B6"; /* play icon */
+.video-thumb__play {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 64px;
-  height: 64px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.95);
-  color: #2563eb;
-  font-size: 28px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #e11d48;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);
-  pointer-events: none;
+  font-size: 1.1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-.video-container:hover::after {
-  transform: translate(-50%, -50%) scale(1.06);
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.5);
+.video-carousel-item:hover .video-thumb {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(3, 7, 18, 0.45);
 }
 
-.video-carousel-item h3 {
-  margin-top: 16px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111827;
-  text-align: left;
-}
-
-.yt-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 9999px;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #111827;
-  color: #fff;
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.45);
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
-  opacity: 0;
-  z-index: 5;
-}
-
-.youtube-carousel-wrapper:hover .yt-arrow {
+.video-carousel-item:hover .video-thumb::after {
   opacity: 1;
 }
 
-.yt-arrow-left {
-  left: -4px;
+.video-carousel-item:hover .video-thumb__play {
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
 }
 
-.yt-arrow-right {
-  right: -4px;
+.video-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f4f4f5;
+  line-height: 1.5;
 }
 
-.yt-arrow:hover {
-  background: #2563eb;
-  transform: translateY(-50%) scale(1.04);
+.video-carousel-message {
+  width: 100%;
+  padding: 40px 0;
+  text-align: center;
+  font-size: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .youtube-carousel-wrapper {
+    gap: 12px;
+  }
+
+  .yt-arrow {
+    width: 46px;
+    height: 46px;
+  }
 }
 
 @media (max-width: 768px) {
+  .youtube-section {
+    padding: 60px 0;
+  }
+
+  .youtube-carousel-wrapper {
+    flex-direction: column;
+  }
+
   .yt-arrow {
-    display: none;
+    width: 44px;
+    height: 44px;
+    order: 2;
+  }
+
+  #videoCarousel {
+    order: 1;
+    width: 100%;
+  }
+
+  .video-carousel-item {
+    flex: 0 0 100%;
   }
 }

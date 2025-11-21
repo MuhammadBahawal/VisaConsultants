@@ -19,12 +19,18 @@ if ($conn->connect_error) {
 
 if (isset($_GET['id'])) {
     $id = (int)$_GET['id'];
-    $sql = "DELETE FROM blogs WHERE id = $id";
+    $stmt = $conn->prepare("DELETE FROM blogs WHERE id = ?");
     
-    if ($conn->query($sql)) {
-        header('Location: dashboard.php?success=Blog deleted successfully');
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+        if ($stmt->execute()) {
+            header('Location: dashboard.php?success=Blog deleted successfully');
+        } else {
+            header('Location: dashboard.php?error=Error deleting blog');
+        }
+        $stmt->close();
     } else {
-        header('Location: dashboard.php?error=Error deleting blog');
+        header('Location: dashboard.php?error=Error preparing statement');
     }
 } else {
     header('Location: dashboard.php');

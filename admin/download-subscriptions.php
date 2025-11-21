@@ -21,14 +21,14 @@ header('Content-Type: text/csv; charset=utf-8');
 header('Content-Disposition: attachment; filename=subscriptions.csv');
 
 $output = fopen('php://output', 'w');
-fputcsv($output, ['ID', 'Email', 'Subscribed At']);
+fputcsv($output, ['ID', 'Email', 'Created At']);
 
-$sql = "SELECT * FROM subscriptions ORDER BY subscribed_at DESC";
+$sql = "SELECT * FROM subscriptions ORDER BY created_at DESC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        fputcsv($output, [$row['id'], $row['email'], $row['subscribed_at']]);
+        fputcsv($output, [$row['id'], $row['email'], $row['created_at']]);
     }
 }
 

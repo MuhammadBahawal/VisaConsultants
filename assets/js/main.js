@@ -5,21 +5,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (!toggle || !navLinks) return;
 
-  const CLOSING_MS = 720; // keep in sync with .nav-links.closing transition
+  const CLOSING_MS = 720;
 
-  // Move Apply Now button into mobile menu on mobile/tablet
   function moveApplyButtonToMenu() {
     if (window.innerWidth <= 992 && applyBtn && navLinks) {
-      // Check if button clone already exists in menu
       const existingMenuBtn = navLinks.querySelector('.apply-now-btn');
       if (!existingMenuBtn) {
-        // Clone the button and add to menu
         const clonedBtn = applyBtn.cloneNode(true);
         clonedBtn.classList.add('apply-now-btn');
         navLinks.appendChild(clonedBtn);
       }
     } else {
-      // Remove button clone from menu on desktop
       const menuBtn = navLinks.querySelector('.apply-now-btn');
       if (menuBtn) {
         menuBtn.remove();
@@ -27,10 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Initial check
   moveApplyButtonToMenu();
 
-  // Update on resize
   let resizeTimer;
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
@@ -38,26 +32,21 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   function openMenu() {
-    // ensure no leftover closing state
     navLinks.classList.remove('closing');
     navLinks.classList.add('open');
     toggle.classList.add('is-open');
     toggle.setAttribute('aria-expanded', 'true');
-    // prevent background scroll while open
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
-    // Ensure button is in menu
     moveApplyButtonToMenu();
   }
 
   function closeMenu() {
-    // apply longer closing transition
     navLinks.classList.add('closing');
     navLinks.classList.remove('open');
     toggle.classList.remove('is-open');
     toggle.setAttribute('aria-expanded', 'false');
 
-    // restore scroll after animation completes
     setTimeout(() => {
       navLinks.classList.remove('closing');
       document.documentElement.style.overflow = '';
@@ -70,23 +59,19 @@ document.addEventListener('DOMContentLoaded', function () {
     else openMenu();
   });
 
-  // close menu when clicking a navigation link or apply button
   navLinks.addEventListener('click', function (e) {
     const el = e.target;
     if (el.tagName === 'A' || el.closest('a')) {
-      // allow the click interaction then close (small delay for UX)
       setTimeout(closeMenu, 50);
     }
   });
 
-  // close on ESC
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeMenu();
     }
   });
 
-  // close when clicking outside the open menu (overlay)
   document.addEventListener('click', (e) => {
     if (!navLinks.classList.contains('open')) return;
     const path = e.composedPath ? e.composedPath() : (e.path || []);
@@ -95,39 +80,36 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const openBtn = document.getElementById('openVideoBtn');
+  const modal = document.getElementById('videoModal');
+  const closeBtn = document.getElementById('closeModal');
+  const youtubeFrame = document.getElementById('youtubeFrame');
 
+  if (!openBtn || !modal || !closeBtn || !youtubeFrame) return;
 
+  const videoURL = openBtn.getAttribute('data-video-url') || 'https://www.youtube.com/embed/YOUR_VIDEO_ID';
 
-// video mode js 
-const openBtn = document.getElementById("openVideoBtn");
-const modal = document.getElementById("videoModal");
-const closeBtn = document.getElementById("closeModal");
-const youtubeFrame = document.getElementById("youtubeFrame");
+  const closeModalFunc = () => {
+    modal.classList.remove('active');
+    setTimeout(() => {
+      youtubeFrame.src = '';
+    }, 300);
+  };
 
-// 👉 Your YouTube Video Link
-const videoURL = "https://www.youtube.com/embed/YOUR_VIDEO_ID";
+  openBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    modal.classList.add('active');
+    youtubeFrame.src = `${videoURL}?autoplay=1`;
+  });
 
-openBtn.addEventListener("click", () => {
-  modal.classList.add("active");
-  youtubeFrame.src = videoURL + "?autoplay=1";
+  closeBtn.addEventListener('click', closeModalFunc);
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) closeModalFunc();
+  });
 });
 
-closeBtn.addEventListener("click", closeModalFunc);
-
-window.addEventListener("click", (e) => {
-  if (e.target === modal) closeModalFunc();
-});
-
-function closeModalFunc() {
-  modal.classList.remove("active");
-  setTimeout(() => {
-    youtubeFrame.src = "";
-  }, 300); // removes video after close animation
-}
-
-
-
-// faq section 
 document.addEventListener('DOMContentLoaded', function () {
   const faqItems = document.querySelectorAll('.faq-item');
 
@@ -135,78 +117,81 @@ document.addEventListener('DOMContentLoaded', function () {
     const question = item.querySelector('.faq-question');
 
     question.addEventListener('click', () => {
-      // Close all other FAQ items
       faqItems.forEach(otherItem => {
         if (otherItem !== item) {
           otherItem.classList.remove('active');
         }
       });
 
-      // Toggle current FAQ item
       item.classList.toggle('active');
     });
   });
 });
 
-// carousil js starts 
-
-const carousel = document.querySelector('.carousel');
+const destinationCarousel = document.querySelector('.carousel');
 const leftArrow = document.querySelector('.left-arrow');
 const rightArrow = document.querySelector('.right-arrow');
 
-if (leftArrow && rightArrow && carousel) {
+if (leftArrow && rightArrow && destinationCarousel) {
   leftArrow.addEventListener('click', () => {
-    carousel.scrollBy({ left: -300, behavior: 'smooth' });
+    destinationCarousel.scrollBy({ left: -300, behavior: 'smooth' });
   });
 
   rightArrow.addEventListener('click', () => {
-    carousel.scrollBy({ left: 300, behavior: 'smooth' });
+    destinationCarousel.scrollBy({ left: 300, behavior: 'smooth' });
   });
 }
 
-
-
-// YouTube Video Carousel
 document.addEventListener('DOMContentLoaded', function () {
-  // Fetch videos from the server
-  fetch('api/get-videos.php')
+  const carouselInner = document.getElementById('videoCarouselInner');
+  if (!carouselInner) return;
+
+  const renderMessage = (message, variant = 'muted') => {
+    const style = variant === 'error' ? 'color: #ef4444;' : 'color: #6b7280;';
+    carouselInner.innerHTML = `<p class="video-carousel-message" style="${style}">${message}</p>`;
+  };
+
+  fetch('api/get-videos.php', { cache: 'no-store' })
     .then(response => response.json())
-    .then(videos => {
-      const carouselInner = document.getElementById('videoCarouselInner');
+    .then(data => {
+      const videos = Array.isArray(data) ? data : [];
 
       if (videos.length === 0) {
-        carouselInner.innerHTML = '<p class="text-center w-full py-8 text-gray-500">No videos available.</p>';
+        renderMessage('Videos will appear here as soon as the admin adds them.');
         return;
       }
 
+      carouselInner.innerHTML = '';
       videos.forEach(video => {
-        const videoItem = document.createElement('div');
-        videoItem.className = 'video-carousel-item px-2';
-        videoItem.innerHTML = `
-                    <div class="mx-2">
-                        <div class="video-container">
-                            <iframe 
-                                src="https://www.youtube.com/embed/${video.youtube_url}?rel=0&showinfo=0" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen
-                                loading="lazy"
-                                title="${video.title}">
-                            </iframe>
-                        </div>
-                        <h3 class="mt-2 text-lg font-medium text-gray-800">${video.title}</h3>
-                    </div>
-                `;
-        carouselInner.appendChild(videoItem);
+        const videoCard = document.createElement('a');
+        videoCard.className = 'video-carousel-item';
+        videoCard.href = video.watch_url || `https://www.youtube.com/watch?v=${video.video_id}`;
+        videoCard.target = '_blank';
+        videoCard.rel = 'noopener noreferrer';
+        videoCard.setAttribute('aria-label', `Watch ${video.title} on YouTube`);
+
+        const thumb = document.createElement('div');
+        thumb.className = 'video-thumb';
+        thumb.style.backgroundImage = `url('${video.thumbnail_url || ''}')`;
+
+        const playIcon = document.createElement('span');
+        playIcon.className = 'video-thumb__play';
+        playIcon.innerHTML = '<i class="fa-solid fa-play"></i>';
+        thumb.appendChild(playIcon);
+
+        const title = document.createElement('p');
+        title.className = 'video-title';
+        title.textContent = video.title;
+
+        videoCard.appendChild(thumb);
+        videoCard.appendChild(title);
+        carouselInner.appendChild(videoCard);
       });
 
-      // Initialize carousel
       initVideoCarousel();
     })
-    .catch(error => {
-      console.error('Error loading videos:', error);
-      const carouselInner = document.getElementById('videoCarouselInner');
-      carouselInner.innerHTML = '<p class="text-center w-full py-8 text-red-500">Error loading videos. Please try again later.</p>';
+    .catch(() => {
+      renderMessage('Error loading videos. Please try again later.', 'error');
     });
 });
 
@@ -214,120 +199,134 @@ function initVideoCarousel() {
   const carousel = document.getElementById('videoCarouselInner');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
-  const slides = document.querySelectorAll('.video-carousel-item');
-  const slideCount = slides.length;
+
+  if (!carousel || !prevBtn || !nextBtn) return;
+
+  const slides = carousel.children;
+  if (!slides.length) return;
+
   let currentIndex = 0;
   let slidesPerView = 1;
+  let autoplayTimer = null;
+  let resizeTimer = null;
 
-  function updateSlidesPerView() {
-    if (window.innerWidth >= 1024) {
-      slidesPerView = 3;
-    } else if (window.innerWidth >= 768) {
-      slidesPerView = 2;
-    } else {
-      slidesPerView = 1;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const calculateSlidesPerView = () => {
+    if (window.innerWidth >= 1200) return 4;
+    if (window.innerWidth >= 992) return 3;
+    if (window.innerWidth >= 640) return 2;
+    return 1;
+  };
+
+  const updateSlidesPerView = () => {
+    slidesPerView = calculateSlidesPerView();
+    carousel.style.setProperty('--videos-per-view', slidesPerView);
+    goToSlide(currentIndex);
+  };
+
+  const goToSlide = (index) => {
+    const maxIndex = Math.max(0, slides.length - slidesPerView);
+    if (index > maxIndex) index = 0;
+    if (index < 0) index = maxIndex;
+    currentIndex = index;
+    const offset = (100 / slidesPerView) * currentIndex;
+    carousel.style.transform = `translateX(-${offset}%)`;
+  };
+
+  const nextSlide = () => {
+    goToSlide(currentIndex + 1);
+  };
+
+  const prevSlide = () => {
+    goToSlide(currentIndex - 1);
+  };
+
+  const startAutoplay = () => {
+    if (prefersReducedMotion) return;
+    stopAutoplay();
+    autoplayTimer = setInterval(nextSlide, 6000);
+  };
+
+  const stopAutoplay = () => {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
     }
-    updateCarousel();
-  }
+  };
 
-  function updateCarousel() {
-    const slideWidth = 100 / slidesPerView;
-    const offset = -currentIndex * slideWidth;
-    carousel.style.transform = `translateX(${offset}%)`;
-  }
+  const resetAutoplay = () => {
+    stopAutoplay();
+    startAutoplay();
+  };
 
-  function goToSlide(index) {
-    const maxIndex = Math.max(0, slideCount - slidesPerView);
-    currentIndex = Math.max(0, Math.min(index, maxIndex));
-    updateCarousel();
-  }
+  prevBtn.addEventListener('click', () => {
+    prevSlide();
+    resetAutoplay();
+  });
 
-  function nextSlide() {
-    const maxIndex = Math.max(0, slideCount - slidesPerView);
-    if (currentIndex < maxIndex) {
-      currentIndex++;
-      updateCarousel();
-    }
-  }
+  nextBtn.addEventListener('click', () => {
+    nextSlide();
+    resetAutoplay();
+  });
 
-  function prevSlide() {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateCarousel();
-    }
-  }
-
-  // Event listeners
-  prevBtn.addEventListener('click', prevSlide);
-  nextBtn.addEventListener('click', nextSlide);
-
-  // Handle keyboard navigation
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
       prevSlide();
+      resetAutoplay();
     } else if (e.key === 'ArrowRight') {
       nextSlide();
+      resetAutoplay();
     }
   });
 
-  // Handle touch events for mobile
   let touchStartX = 0;
-  let touchEndX = 0;
+  const swipeThreshold = 50;
 
   carousel.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
   }, { passive: true });
 
   carousel.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].clientX;
-    handleSwipe();
-  }, { passive: true });
-
-  function handleSwipe() {
-    const swipeThreshold = 50;
+    const touchEndX = e.changedTouches[0].clientX;
     const diff = touchStartX - touchEndX;
-
     if (Math.abs(diff) > swipeThreshold) {
       if (diff > 0) {
         nextSlide();
       } else {
         prevSlide();
       }
+      resetAutoplay();
     }
-  }
+  }, { passive: true });
 
-  // Update on window resize
-  window.addEventListener('resize', updateSlidesPerView);
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      updateSlidesPerView();
+    }, 150);
+  });
 
-  // Initialize
   updateSlidesPerView();
+  startAutoplay();
 }
 
-
-
-
-// Handle subscription form
-// Handle subscription form
 document.addEventListener('DOMContentLoaded', function () {
   const subscribeForm = document.getElementById('subscribeForm');
 
   if (subscribeForm) {
     subscribeForm.addEventListener('submit', async function (e) {
-      e.preventDefault(); // Prevent default form submission
+      e.preventDefault();
 
-      const emailInput = subscribeForm.querySelector('input[type="email"]');
       const submitBtn = subscribeForm.querySelector('button[type="submit"]');
       const originalBtnText = submitBtn.innerHTML;
 
       try {
-        // Show loading state
         submitBtn.disabled = true;
         submitBtn.innerHTML = 'Subscribing...';
 
-        // Get form data
         const formData = new FormData(subscribeForm);
 
-        // Send AJAX request
         const response = await fetch('admin/subscribe.php', {
           method: 'POST',
           body: formData,
@@ -338,10 +337,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const data = await response.json();
 
-        // Show success/error message
         showPopup(data.message, data.success ? 'success' : 'error');
 
-        // Reset form if successful
         if (data.success) {
           subscribeForm.reset();
         }
@@ -349,7 +346,6 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Error:', error);
         showPopup('An error occurred. Please try again later.', 'error');
       } finally {
-        // Reset button state
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
       }
@@ -357,56 +353,50 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// Function to show popup
 function showPopup(message, type = 'success') {
-  // Create popup element if it doesn't exist
   let popup = document.getElementById('customPopup');
 
   if (!popup) {
     popup = document.createElement('div');
     popup.id = 'customPopup';
     popup.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            border-radius: 4px;
-            color: white;
-            font-weight: 500;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 9999;
-            transform: translateX(120%);
-            transition: transform 0.3s ease-in-out;
-            max-width: 90%;
-            text-align: center;
-        `;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 25px;
+      border-radius: 4px;
+      color: white;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 9999;
+      transform: translateX(120%);
+      transition: transform 0.3s ease-in-out;
+      max-width: 90%;
+      text-align: center;
+    `;
     document.body.appendChild(popup);
   }
 
-  // Set message and style based on type
   popup.textContent = message;
   popup.style.backgroundColor = type === 'success' ? '#10B981' : '#EF4444';
-
-  // Show popup
   popup.style.transform = 'translateX(0)';
 
-  // Hide after 5 seconds
   setTimeout(() => {
     popup.style.transform = 'translateX(120%)';
   }, 5000);
 }
 
-// Add CSS for the popup
 const style = document.createElement('style');
 style.textContent = `
-    @keyframes slideIn {
-        from { transform: translateX(120%); }
-        to { transform: translateX(0); }
-    }
-    
-    @keyframes slideOut {
-        from { transform: translateX(0); }
-        to { transform: translateX(120%); }
-    }
+  @keyframes slideIn {
+    from { transform: translateX(120%); }
+    to { transform: translateX(0); }
+  }
+
+  @keyframes slideOut {
+    from { transform: translateX(0); }
+    to { transform: translateX(120%); }
+  }
 `;
 document.head.appendChild(style);
+

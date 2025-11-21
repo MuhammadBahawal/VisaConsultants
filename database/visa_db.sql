@@ -47,6 +47,13 @@ INSERT INTO users (username, email, password) VALUES
 -- Or after importing run (replace <HASH> with generated hash):
 -- UPDATE users SET password = '<HASH>' WHERE email = 'ahsan@gmail.com';
 
+-- Subscriptions table
+CREATE TABLE IF NOT EXISTS subscriptions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- YouTube Videos table
 CREATE TABLE IF NOT EXISTS youtube_videos (
     id INT PRIMARY KEY AUTO_INCREMENT,

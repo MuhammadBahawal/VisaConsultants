@@ -7,48 +7,66 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Database configuration
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "visa_consultants";
+require_once '../includes/db.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// Ensure subscriptions table exists with correct structure
+$checkTable = $conn->query("SHOW TABLES LIKE 'subscriptions'");
+if ($checkTable && $checkTable->num_rows > 0) {
+    // Check if created_at column exists
+    $checkColumn = $conn->query("SHOW COLUMNS FROM subscriptions LIKE 'created_at'");
+    if (!$checkColumn || $checkColumn->num_rows == 0) {
+        // Check if subscribed_at exists and rename it
+        $checkOldColumn = $conn->query("SHOW COLUMNS FROM subscriptions LIKE 'subscribed_at'");
+        if ($checkOldColumn && $checkOldColumn->num_rows > 0) {
+            @$conn->query("ALTER TABLE subscriptions CHANGE subscribed_at created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP");
+        } else {
+            // Add created_at column if neither exists
+            @$conn->query("ALTER TABLE subscriptions ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP");
+        }
+    }
+} else {
+    // Create subscriptions table if it doesn't exist
+    @$conn->query("CREATE TABLE IF NOT EXISTS subscriptions (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        email VARCHAR(255) NOT NULL UNIQUE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
 }
 
-// Get all blogs
-$sql = "SELECT * FROM blogs ORDER BY created_at DESC";
-$result = $conn->query($sql);
 $blogs = [];
-if ($result->num_rows > 0) {
+$contacts = [];
+$subscriptions = [];
+
+if ($result = $conn->query("SELECT id, title, category FROM blogs ORDER BY created_at DESC")) {
     while ($row = $result->fetch_assoc()) {
         $blogs[] = $row;
     }
+    $result->free();
 }
 
-// Get contact messages
-$sqlContacts = "SELECT * FROM contacts ORDER BY created_at DESC";
-$resultContacts = $conn->query($sqlContacts);
-$contacts = [];
-if ($resultContacts && $resultContacts->num_rows > 0) {
+if ($resultContacts = $conn->query("SELECT * FROM contacts ORDER BY created_at DESC")) {
     while ($row = $resultContacts->fetch_assoc()) {
         $contacts[] = $row;
     }
+    $resultContacts->free();
 }
-// Get subscribed emails
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
 
-$sqlSubscriptions = "SELECT * FROM subscriptions ORDER BY subscribed_at DESC";
-$resultSubscriptions = $conn->query($sqlSubscriptions);
-$subscriptions = [];
-if ($resultSubscriptions && $resultSubscriptions->num_rows > 0) {
-    while ($row = $resultSubscriptions->fetch_assoc()) {
+// Try to get subscriptions with created_at, fallback to subscribed_at if needed
+$resultSubs = $conn->query("SELECT * FROM subscriptions ORDER BY created_at DESC");
+if (!$resultSubs) {
+    // If created_at doesn't exist, try subscribed_at
+    $resultSubs = $conn->query("SELECT *, subscribed_at as created_at FROM subscriptions ORDER BY subscribed_at DESC");
+}
+
+if ($resultSubs) {
+    while ($row = $resultSubs->fetch_assoc()) {
+        // Normalize: if subscribed_at exists but created_at doesn't, use subscribed_at
+        if (!isset($row['created_at']) && isset($row['subscribed_at'])) {
+            $row['created_at'] = $row['subscribed_at'];
+        }
         $subscriptions[] = $row;
     }
+    $resultSubs->free();
 }
 
 $conn->close();
@@ -259,7 +277,7 @@ $conn->close();
 
     /* ----------------------------- */
     /* RESPONSIVE FIXES BELOW       */
-    • ----------------------------- */
+    /* ----------------------------- */
 
     /* Medium screens */
     @media (max-width: 992px) {
@@ -331,6 +349,7 @@ $conn->close();
                 <a href="dashboard.php" class="active">📊 Dashboard</a>
                 <a href="#contacts-section">📩 Contact Messages</a>
                 <a href="add-blog.php">➕ Add Blog</a>
+                <a href="youtube-videos.php">🎬 YouTube Videos</a>
                 <a href="logout.php" style="color: #ff6b6b;">🚪 Logout</a>
             </nav>
         </aside>
@@ -396,7 +415,9 @@ $conn->close();
                                     <td><?php echo nl2br(htmlspecialchars($contact['message'])); ?></td>
                                     <td><?php echo htmlspecialchars($contact['created_at']); ?></td>
                                     <td class="action-btns">
-                                    <a href="delete-contact.php?id=<?php echo $contact['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this message?');">Delete</a>                                </tr>
+                                        <a href="delete-contact.php?id=<?php echo $contact['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this message?');">Delete</a>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
@@ -422,7 +443,7 @@ $conn->close();
                 <?php foreach ($subscriptions as $sub): ?>
                     <tr>
                         <td><?php echo htmlspecialchars($sub['email']); ?></td>
-                        <td><?php echo htmlspecialchars($sub['subscribed_at']); ?></td>
+                        <td><?php echo htmlspecialchars($sub['created_at']); ?></td>
                         <td>
                             <a href="delete-subscription.php?id=<?php echo $sub['id']; ?>" 
                                class="delete-btn" 
@@ -452,4 +473,5 @@ $conn->close();
 
 
 </body>
+</html>
 </html>
