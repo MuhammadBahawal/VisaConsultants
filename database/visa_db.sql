@@ -65,6 +65,36 @@ CREATE TABLE IF NOT EXISTS youtube_videos (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+-- Applications table
+CREATE TABLE IF NOT EXISTS applications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category VARCHAR(50),
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    date_of_birth DATE,
+    gender VARCHAR(20),
+    email VARCHAR(255) NOT NULL,
+    phone_country_code VARCHAR(10),
+    phone VARCHAR(50) NOT NULL,
+    alt_phone_country_code VARCHAR(10),
+    alternate_phone VARCHAR(50),
+    address TEXT,
+    city VARCHAR(100),
+    nationality VARCHAR(100),
+    work_experience TEXT,
+    education TEXT,
+    academic_tests TEXT,
+    english_test_taken VARCHAR(10),
+    aptitude_test_taken VARCHAR(10),
+    preferred_countries TEXT,
+    preferred_course VARCHAR(255),
+    preferred_city VARCHAR(100),
+    other_query TEXT,
+    hear_about_us VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE DATABASE course_enrollment;
 
 USE course_enrollment;
@@ -82,6 +112,7 @@ CREATE TABLE enrollments (
   delivery_mode VARCHAR(20),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 -- Insert sample blogs
 INSERT INTO blogs (title, slug, category, image_url, short_description, content, author_id) VALUES
 ('ANSO Scholarship In China For Pakistani Students 2026', 'anso-scholarship-china-2026', 'Scholarship', 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop', 'Explore ANSO Scholarship opportunities in China for Pakistani students.', 'Complete guide about ANSO Scholarship in China for Pakistani students in 2026...', 1),
