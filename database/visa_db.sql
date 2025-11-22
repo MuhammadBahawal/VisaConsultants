@@ -65,7 +65,23 @@ CREATE TABLE IF NOT EXISTS youtube_videos (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+CREATE DATABASE course_enrollment;
 
+USE course_enrollment;
+
+CREATE TABLE enrollments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  email VARCHAR(100),
+  phone VARCHAR(20),
+  city VARCHAR(50),
+  nationality VARCHAR(50),
+  course VARCHAR(100),
+  course_type VARCHAR(50),
+  delivery_mode VARCHAR(20),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 -- Insert sample blogs
 INSERT INTO blogs (title, slug, category, image_url, short_description, content, author_id) VALUES
 ('ANSO Scholarship In China For Pakistani Students 2026', 'anso-scholarship-china-2026', 'Scholarship', 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop', 'Explore ANSO Scholarship opportunities in China for Pakistani students.', 'Complete guide about ANSO Scholarship in China for Pakistani students in 2026...', 1),

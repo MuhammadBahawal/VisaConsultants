@@ -400,3 +400,16 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// Redirect to enrollment page when clicking enroll button
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll("#courses-section .enroll-btn").forEach(button => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      const courseCard = button.closest(".course-card");
+      const courseName = courseCard.getAttribute("data-course");
+      
+      // Redirect to enrollment page with course parameter
+      window.location.href = `enrollment.html?course=${encodeURIComponent(courseName)}`;
+    });
+  });
+});

@@ -36,6 +36,7 @@ if ($checkTable && $checkTable->num_rows > 0) {
 $blogs = [];
 $contacts = [];
 $subscriptions = [];
+$enrollments = [];
 
 if ($result = $conn->query("SELECT id, title, category FROM blogs ORDER BY created_at DESC")) {
     while ($row = $result->fetch_assoc()) {
@@ -67,6 +68,45 @@ if ($resultSubs) {
         $subscriptions[] = $row;
     }
     $resultSubs->free();
+}
+
+// Get enrollments from course_enrollment database
+$enrollmentDb = new mysqli('localhost', 'root', '');
+if (!$enrollmentDb->connect_error) {
+    // Check if database exists, create if not
+    $dbExists = $enrollmentDb->query("SHOW DATABASES LIKE 'course_enrollment'");
+    if ($dbExists && $dbExists->num_rows == 0) {
+        $enrollmentDb->query("CREATE DATABASE IF NOT EXISTS course_enrollment");
+    }
+    $enrollmentDb->select_db('course_enrollment');
+    
+    // Check if table exists, create if not
+    $tableExists = $enrollmentDb->query("SHOW TABLES LIKE 'enrollments'");
+    if ($tableExists && $tableExists->num_rows == 0) {
+        $createTable = "CREATE TABLE IF NOT EXISTS enrollments (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            first_name VARCHAR(50) NOT NULL,
+            last_name VARCHAR(50) NOT NULL,
+            email VARCHAR(100) NOT NULL,
+            phone VARCHAR(20) NOT NULL,
+            city VARCHAR(50),
+            nationality VARCHAR(50),
+            course VARCHAR(100) NOT NULL,
+            course_type VARCHAR(50) NOT NULL,
+            delivery_mode VARCHAR(20) NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )";
+        $enrollmentDb->query($createTable);
+    }
+    
+    $resultEnrollments = $enrollmentDb->query("SELECT * FROM enrollments ORDER BY created_at DESC");
+    if ($resultEnrollments) {
+        while ($row = $resultEnrollments->fetch_assoc()) {
+            $enrollments[] = $row;
+        }
+        $resultEnrollments->free();
+    }
+    $enrollmentDb->close();
 }
 
 $conn->close();
@@ -348,6 +388,7 @@ $conn->close();
             <nav class="sidebar-nav">
                 <a href="dashboard.php" class="active">📊 Dashboard</a>
                 <a href="#contacts-section">📩 Contact Messages</a>
+                <a href="#enrollments-section">🎓 Course Enrollments</a>
                 <a href="add-blog.php">➕ Add Blog</a>
                 <a href="youtube-videos.php">🎬 YouTube Videos</a>
                 <a href="logout.php" style="color: #ff6b6b;">🚪 Logout</a>
@@ -467,6 +508,56 @@ $conn->close();
         style="background:#2196F3; margin-bottom: 20px;">
     Download Subscriptions
 </button>
+
+            <h2 id="enrollments-section" class="dashboard-title" style="margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem;">Course Enrollments</h2>
+            <div class="blogs-table">
+                <?php if (!empty($enrollments)): ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Course</th>
+                                <th>Course Type</th>
+                                <th>Delivery Mode</th>
+                                <th>City</th>
+                                <th>Nationality</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($enrollments as $enrollment): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($enrollment['first_name'] . ' ' . $enrollment['last_name']); ?></td>
+                                    <td><?php echo htmlspecialchars($enrollment['email']); ?></td>
+                                    <td><?php echo htmlspecialchars($enrollment['phone']); ?></td>
+                                    <td><?php echo htmlspecialchars($enrollment['course']); ?></td>
+                                    <td><?php echo htmlspecialchars($enrollment['course_type']); ?></td>
+                                    <td><?php echo htmlspecialchars($enrollment['delivery_mode']); ?></td>
+                                    <td><?php echo htmlspecialchars($enrollment['city'] ?: 'N/A'); ?></td>
+                                    <td><?php echo htmlspecialchars($enrollment['nationality'] ?: 'N/A'); ?></td>
+                                    <td><?php echo htmlspecialchars($enrollment['created_at']); ?></td>
+                                    <td class="action-btns">
+                                        <a href="delete-enrollment.php?id=<?php echo $enrollment['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this enrollment?');">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php else: ?>
+                    <div class="empty-state">
+                        <p>No enrollments found yet.</p>
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <button onclick="window.location.href='download-enrollments.php';" 
+                    class="add-blog-btn" 
+                    style="background:#7cb342; margin-bottom: 20px;">
+                Download Enrollments (Excel)
+            </button>
 
         </main>
     </div>
