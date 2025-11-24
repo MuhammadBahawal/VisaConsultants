@@ -22,26 +22,39 @@
 </head>
 
 <body>
-  <header class="header">
-    <nav class="navbar container">
-      <a href="index.html" class="logo">Smart Study</a>
+    <header class="header">
+        <nav class="navbar container">
+            <a href="index.html" class="logo">Smart Study</a>
 
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span class="hamburger"></span>
-      </button>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
 
-      <ul class="nav-links">
-        <li><a href="study-visa.html">Study Visa</a></li>
-        <li><a href="visit-visa.html">Visit Visa</a></li>
-        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-        <li><a href="blog.html">Blog & Articles</a></li>
-        <li><a href="">More</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul>
+            <ul class="nav-links">
+                <li><a href="study-visa.html">Study Visa</a></li>
+                <li><a href="visit-visa.html">Visit Visa</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="blog.html">Blog & Articles</a></li>
+                <li class="nav-item nav-item--dropdown">
+                    <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                        More
+                        <span class="nav-dropdown-caret" aria-hidden="true"></span>
+                    </button>
+                    <ul class="nav-dropdown" role="menu">
+                        <li><a href="index.html#testimonials-section" role="menuitem">Teams</a></li>
+                        <li><a href="index.html#courses-section" role="menuitem">Courses</a></li>
+                        <li><a href="contact.html#contact-section" role="menuitem">Branches</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li class="mobile-apply-btn-container">
+                    <a href="./contact.html#contact-form" class="apply-now-btn mobile-apply-btn">Apply Now</a>
+                </li>
+            </ul>
 
-      <a href="./contact.html#contact-form" class="btn apply-now-btn">Apply Now</a>
-    </nav>
-  </header>
+            <a href="./contact.html#contact-form" class="apply-now-btn desktop-apply-btn">Apply Now</a>
+        </nav>
+    </header>
 
 
   <div class="main">
@@ -302,12 +315,13 @@
         </div>
       </div>
     </section>
-<!-- youtube section start -->
+    <!-- youtube section start -->
     <section class="youtube-section">
       <div class="youtube-section-inner">
         <div class="youtube-badge">Our Videos</div>
         <h2 class="youtube-title">Success Stories &amp; Visa Guides</h2>
-        <p class="youtube-lede">Watch real client journeys, study visa walkthroughs, and expert tips directly from our team.</p>
+        <p class="youtube-lede">Watch real client journeys, study visa walkthroughs, and expert tips directly from our
+          team.</p>
       </div>
 
       <div class="youtube-carousel-wrapper">
@@ -326,7 +340,7 @@
         </button>
       </div>
     </section>
-<!-- youtube section end -->
+    <!-- youtube section end -->
 
     <!-- 
     <section id="blog-section">
@@ -416,37 +430,42 @@
     <section id="courses-section">
       <p class="section-subtitle">TOP COURSES</p>
       <h2>Our Featured Courses</h2>
-    
+
       <div class="courses-container" id="course-list">
         <article class="course-card" data-course="IELTS Academic Course">
           <img src="https://ielts-up.com/images/ielts-academic-graph.jpg" alt="IELTS Academic Course" />
           <p class="course-category">English Proficiency</p>
           <h3 class="course-title">IELTS Academic Course</h3>
-          <p class="course-desc">Prepare for university studies with our comprehensive IELTS Academic Course. Learn...</p>
+          <p class="course-desc">Prepare for university studies with our comprehensive IELTS Academic Course. Learn...
+          </p>
           <div class="stars" aria-label="5 star rating">★★★★★</div>
           <button class="enroll-btn" type="button">Enroll Now</button>
         </article>
-    
+
         <article class="course-card" data-course="PTE Academic">
-          <img src="https://www.pearsonpte.com/content/dam/region-us/en/pte_academic/pte-academic-microsite/images/hero-graphic.jpg" alt="PTE Academic" />
+          <img
+            src="https://www.pearsonpte.com/content/dam/region-us/en/pte_academic/pte-academic-microsite/images/hero-graphic.jpg"
+            alt="PTE Academic" />
           <p class="course-category">English Proficiency</p>
           <h3 class="course-title">PTE Academic</h3>
-          <p class="course-desc">Excel in PTE Academic with comprehensive training. Enhance language skills, ace exams, and...</p>
+          <p class="course-desc">Excel in PTE Academic with comprehensive training. Enhance language skills, ace exams,
+            and...</p>
           <div class="stars" aria-label="5 star rating">★★★★★</div>
           <button class="enroll-btn" type="button">Enroll Now</button>
         </article>
-    
+
         <article class="course-card" data-course="IELTS Life Skills (A1/B1)">
           <img src="https://ielts-up.com/images/ielts-life-skills-graph.jpg" alt="IELTS Life Skills (A1/B1)" />
           <p class="course-category">English Proficiency</p>
           <h3 class="course-title">IELTS Life Skills (A1/B1)</h3>
-          <p class="course-desc">Attain practical language competence with IELTS Life Skills A1/B1. Develop essential skills for...</p>
+          <p class="course-desc">Attain practical language competence with IELTS Life Skills A1/B1. Develop essential
+            skills for...</p>
           <div class="stars" aria-label="5 star rating">★★★★★</div>
           <button class="enroll-btn" type="button">Enroll Now</button>
         </article>
       </div>
     </section>
-    
+
     <!-- Modal Enrollment Form -->
     <div id="enroll-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <div class="modal-content">
@@ -454,25 +473,26 @@
         <h3 id="modal-title">Enroll in Course</h3>
         <form id="enroll-form" action="submit_enrollment.php" method="POST">
           <input type="hidden" id="form-course" name="course" value="" />
-    
+
           <label for="first-name">First Name *</label>
           <input id="first-name" name="first_name" type="text" required />
-    
+
           <label for="last-name">Last Name *</label>
           <input id="last-name" name="last_name" type="text" required />
-    
+
           <label for="email">Email *</label>
           <input id="email" name="email" type="email" required />
-    
+
           <label for="phone">Phone Number *</label>
-          <input id="phone" name="phone" type="tel" required pattern="[0-9+ -]{7,15}" title="Please enter a valid phone number" />
-    
+          <input id="phone" name="phone" type="tel" required pattern="[0-9+ -]{7,15}"
+            title="Please enter a valid phone number" />
+
           <label for="city">City</label>
           <input id="city" name="city" type="text" />
-    
+
           <label for="nationality">Nationality</label>
           <input id="nationality" name="nationality" type="text" />
-    
+
           <label for="course-select">Select Course *</label>
           <select id="course-select" name="selected_course" required>
             <option value="" disabled selected>Select a course</option>
@@ -480,7 +500,7 @@
             <option value="PTE Academic">PTE Academic</option>
             <option value="IELTS Life Skills (A1/B1)">IELTS Life Skills (A1/B1)</option>
           </select>
-    
+
           <label for="course-type">Course Type *</label>
           <select id="course-type" name="course_type" required>
             <option value="" disabled selected>Select course type</option>
@@ -488,19 +508,19 @@
             <option value="PTE">PTE</option>
             <option value="ETS">ETS</option>
           </select>
-    
+
           <label for="delivery-mode">Select Delivery Mode *</label>
           <select id="delivery-mode" name="delivery_mode" required>
             <option value="" disabled selected>Select mode</option>
             <option value="Online">Online</option>
             <option value="Physical">Physical</option>
           </select>
-    
+
           <button type="submit">Submit Enrollment</button>
         </form>
       </div>
     </div>
-    
+
 
 
     <section id="testimonials-section">
