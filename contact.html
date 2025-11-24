@@ -335,10 +335,10 @@
 
     <header class="header">
         <nav class="navbar container">
-            <a href="./index.html" class="logo">Smart Study</a>
+            <a href="index.html" class="logo">Smart Study</a>
 
             <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="hamburger"></span>
+                <i class="fa-solid fa-bars"></i>
             </button>
 
             <ul class="nav-links">
@@ -358,24 +358,29 @@
                     </ul>
                 </li>
                 <li><a href="contact.html">Contact Us</a></li>
-              </ul>
-        
-            <a href="./contact.html#contact-form" class="btn apply-now-btn">Apply Now</a>
+                <li class="mobile-apply-btn-container">
+                    <a href="./contact.html#contact-form" class="apply-now-btn mobile-apply-btn">Apply Now</a>
+                </li>
+            </ul>
+
+            <a href="./contact.html#contact-form" class="apply-now-btn desktop-apply-btn">Apply Now</a>
         </nav>
     </header>
 
     <div class="main">
         <section class="contact-section" id="contact-section">
             <div class="application-form-container" id="contact-form">
-                <h1 style="text-align: center; font-size: 2.5rem; color: #1a202c; margin-bottom: 10px;">Application Form</h1>
-                <p style="text-align: center; color: #718096; margin-bottom: 40px;">Please fill out all required fields to complete your application</p>
+                <h1 style="text-align: center; font-size: 2.5rem; color: #1a202c; margin-bottom: 10px;">Application Form
+                </h1>
+                <p style="text-align: center; color: #718096; margin-bottom: 40px;">Please fill out all required fields
+                    to complete your application</p>
 
                 <!-- Category Tabs -->
                 <div class="category-tabs">
                     <div class="category-tab active" data-category="study-abroad">Study Abroad</div>
                     <div class="category-tab" data-category="visit-visa">Visit Visa</div>
-                    <div class="category-tab" data-category="immigration">Immigration</div>
-                    <div class="category-tab" data-category="english-test">English Test</div>
+                    <!-- <div class="category-tab" data-category="immigration">Immigration</div>
+                    <div class="category-tab" data-category="english-test">English Test</div> -->
                 </div>
 
                 <form id="applicationForm" action="handle_application.php" method="POST">
@@ -525,7 +530,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Year of Completion</label>
-                                        <input type="text" name="education[1][year]" class="form-input" placeholder="YYYY">
+                                        <input type="text" name="education[1][year]" class="form-input"
+                                            placeholder="YYYY">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Institution</label>
@@ -614,39 +620,48 @@
                                         <label for="country_uk">UK</label>
                                     </div>
                                     <div class="checkbox-option">
-                                        <input type="checkbox" name="preferred_countries[]" id="country_usa" value="USA">
+                                        <input type="checkbox" name="preferred_countries[]" id="country_usa"
+                                            value="USA">
                                         <label for="country_usa">USA</label>
                                     </div>
                                     <div class="checkbox-option">
-                                        <input type="checkbox" name="preferred_countries[]" id="country_australia" value="Australia">
+                                        <input type="checkbox" name="preferred_countries[]" id="country_australia"
+                                            value="Australia">
                                         <label for="country_australia">Australia</label>
                                     </div>
                                     <div class="checkbox-option">
-                                        <input type="checkbox" name="preferred_countries[]" id="country_europe" value="Europe">
+                                        <input type="checkbox" name="preferred_countries[]" id="country_europe"
+                                            value="Europe">
                                         <label for="country_europe">Europe</label>
                                     </div>
                                     <div class="checkbox-option">
-                                        <input type="checkbox" name="preferred_countries[]" id="country_dubai" value="Dubai">
+                                        <input type="checkbox" name="preferred_countries[]" id="country_dubai"
+                                            value="Dubai">
                                         <label for="country_dubai">Dubai</label>
                                     </div>
                                     <div class="checkbox-option">
-                                        <input type="checkbox" name="preferred_countries[]" id="country_canada" value="Canada">
+                                        <input type="checkbox" name="preferred_countries[]" id="country_canada"
+                                            value="Canada">
                                         <label for="country_canada">Canada</label>
                                     </div>
                                     <div class="checkbox-option">
-                                        <input type="checkbox" name="preferred_countries[]" id="country_malaysia" value="Malaysia">
+                                        <input type="checkbox" name="preferred_countries[]" id="country_malaysia"
+                                            value="Malaysia">
                                         <label for="country_malaysia">Malaysia</label>
                                     </div>
                                     <div class="checkbox-option">
-                                        <input type="checkbox" name="preferred_countries[]" id="country_germany" value="Germany">
+                                        <input type="checkbox" name="preferred_countries[]" id="country_germany"
+                                            value="Germany">
                                         <label for="country_germany">Germany</label>
                                     </div>
                                     <div class="checkbox-option">
-                                        <input type="checkbox" name="preferred_countries[]" id="country_cyprus" value="Cyprus">
+                                        <input type="checkbox" name="preferred_countries[]" id="country_cyprus"
+                                            value="Cyprus">
                                         <label for="country_cyprus">Cyprus</label>
                                     </div>
                                     <div class="checkbox-option">
-                                        <input type="checkbox" name="preferred_countries[]" id="country_other" value="Other">
+                                        <input type="checkbox" name="preferred_countries[]" id="country_other"
+                                            value="Other">
                                         <label for="country_other">Other</label>
                                     </div>
                                 </div>
@@ -679,7 +694,8 @@
                                         <label for="hear_call">Call / SMS</label>
                                     </div>
                                     <div class="radio-option">
-                                        <input type="radio" name="hear_about_us" id="hear_friend" value="Through a Friend">
+                                        <input type="radio" name="hear_about_us" id="hear_friend"
+                                            value="Through a Friend">
                                         <label for="hear_friend">Through a Friend</label>
                                     </div>
                                     <div class="radio-option">
@@ -709,7 +725,8 @@
                 <p id="footer-description">Your trusted partner for visa consultation and application services.</p>
                 <div id="footer-social-icons">
                     <a href="#" class="social-icon" title="Facebook">f</a>
-                    <a href="#" class="social-icon" title="YouTube" style="color: red;"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="social-icon" title="YouTube" style="color: red;"><i
+                            class="fa-brands fa-youtube"></i></a>
                     <a href="#" class="social-icon" title="Instagram">📷</a>
                 </div>
             </div>
@@ -743,7 +760,7 @@
     <script>
         // Category Tabs
         document.querySelectorAll('.category-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
+            tab.addEventListener('click', function () {
                 document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
                 document.getElementById('selected_category').value = this.dataset.category;
@@ -753,7 +770,7 @@
         // Work Experience Counter
         let workExpCounter = 0;
 
-        document.getElementById('add-work-experience').addEventListener('click', function() {
+        document.getElementById('add-work-experience').addEventListener('click', function () {
             workExpCounter++;
             const container = document.getElementById('work-experience-container');
             const section = document.createElement('div');
@@ -795,7 +812,7 @@
         // Education Counter
         let educationCounter = 1;
 
-        document.getElementById('add-education').addEventListener('click', function() {
+        document.getElementById('add-education').addEventListener('click', function () {
             educationCounter++;
             const container = document.getElementById('education-container');
             const section = document.createElement('div');
@@ -844,7 +861,7 @@
         // Academic Tests Counter
         let academicTestCounter = 0;
 
-        document.getElementById('add-academic-test').addEventListener('click', function() {
+        document.getElementById('add-academic-test').addEventListener('click', function () {
             academicTestCounter++;
             const container = document.getElementById('academic-tests-container');
             const section = document.createElement('div');
@@ -876,11 +893,11 @@
         });
 
         // Form Submission
-        document.getElementById('applicationForm').addEventListener('submit', async function(e) {
+        document.getElementById('applicationForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const submitBtn = document.getElementById('submitBtn');
             const originalText = submitBtn.innerHTML;
-            
+
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
 

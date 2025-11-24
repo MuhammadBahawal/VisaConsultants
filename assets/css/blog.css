@@ -51,7 +51,7 @@
 
 .blog-search-btn {
     padding: 0.85rem 2rem;
-    background: linear-gradient(135deg, #0b6efd 0%, #0056d8 100%);
+    background: linear-gradient(135deg, #9f0808 0%, #9f0808 100%);
     color: white;
     border: none;
     border-radius: 50px;
@@ -62,7 +62,7 @@
     align-items: center;
     gap: 0.6rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(11, 110, 253, 0.4);
+    box-shadow: 0 4px 15px rgba(105, 5, 5, 0.4);
 }
 
 .blog-search-btn:hover {
