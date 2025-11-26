@@ -524,6 +524,7 @@ a {
 }
 
 .hero-image {
+  padding-top: 5%;
   flex: 1 1 400px;
   position: relative;
   text-align: center;
