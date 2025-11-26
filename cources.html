@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Our Courses - Smart Study</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding-top: 12%;
+            padding-bottom: 60px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .page-header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-header-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .page-header-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Courses Section */
+        .courses-section {
+            padding: 40px 20px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .courses-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #1a202c;
+            position: relative;
+            display: inline-block;
+        }
+
+        .courses-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #4299e1, #38b2ac);
+            border-radius: 2px;
+        }
+
+        /* Courses Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        /* Course Card - Updated Design with Images */
+        .course-card {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 420px;
+            /* Increased height for image */
+            border: 1px solid #e2e8f0;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .course-image {
+            height: 180px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .course-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #4299e1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 12px;
+            background-color: #ebf8ff;
+            border-radius: 20px;
+        }
+
+        .course-card-content {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #2d3748;
+            line-height: 1.3;
+        }
+
+        .course-card p {
+            font-size: 0.95rem;
+            color: #4a5568;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex: 1;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        /* Enroll Button */
+        .course-card a {
+            text-decoration: none;
+            text-align: center;
+            padding: 12px 20px;
+            background: linear-gradient(to right, #4299e1, #38b2ac);
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: block;
+            font-size: 0.95rem;
+            margin-top: auto;
+        }
+
+        .course-card a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4);
+        }
+
+        /* Footer */
+        #footer-section {
+            background: #1a202c;
+            color: white;
+            padding: 50px 20px 20px;
+            margin-top: 60px;
+        }
+
+        #footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        #footer-about h2 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        #footer-description {
+            color: #cbd5e0;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        #footer-social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: #4299e1;
+            transform: translateY(-2px);
+        }
+
+        .footer-heading {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-list,
+        .footer-contact-list {
+            list-style: none;
+        }
+
+        .footer-list li,
+        .footer-contact-list li {
+            margin-bottom: 10px;
+        }
+
+        .footer-list a,
+        .footer-contact-list a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-list a:hover,
+        .footer-contact-list a:hover {
+            color: #4299e1;
+        }
+
+        #footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #2d3748;
+            text-align: center;
+            color: #a0aec0;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float img {
+            width: 35px;
+            height: 35px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .page-header {
+                padding-top: 20%;
+                padding-bottom: 50px;
+            }
+
+            .page-header-title {
+                font-size: 2.5rem;
+            }
+
+            .courses-section {
+                padding: 30px 15px 60px;
+            }
+
+            .courses-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
+            }
+
+            .course-card {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding-top: 25%;
+                padding-bottom: 40px;
+            }
+
+            .page-header-title {
+                font-size: 2.2rem;
+            }
+
+            .page-header-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .courses-section h2 {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+
+            .course-card-content {
+                padding: 20px;
+            }
+
+            .course-card h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-header {
+                padding-top: 30%;
+                padding-bottom: 30px;
+            }
+
+            .page-header-title {
+                font-size: 2rem;
+            }
+
+            .page-header-subtitle {
+                font-size: 1rem;
+            }
+
+            .courses-section {
+                padding: 20px 10px 50px;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+                gap: 20px;
+            }
+
+            .course-card {
+                height: 380px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                padding-top: 35%;
+            }
+
+            .page-header-title {
+                font-size: 1.8rem;
+            }
+
+            .courses-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .course-card {
+                height: 360px;
+            }
+
+            .course-card-content {
+                padding: 18px;
+            }
+
+            .course-card h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar container">
+            <a href="index.html" class="logo">Smart Study</a>
+
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="study-visa.html">Study Visa</a></li>
+                <li><a href="visit-visa.html">Visit Visa</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="blog.html">Blog & Articles</a></li>
+                <li class="nav-item nav-item--dropdown">
+                    <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                        More
+                        <span class="nav-dropdown-caret" aria-hidden="true"></span>
+                    </button>
+                    <ul class="nav-dropdown" role="menu">
+                        <li><a href="./Teams.html" role="menuitem">Teams</a></li>
+                        <li><a href="./cources.html" role="menuitem">Courses</a></li>
+                        <li><a href="./branches.html" role="menuitem">Branches</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li class="mobile-apply-btn-container">
+                    <a href="./contact.html#contact-form" class="apply-now-btn mobile-apply-btn">Apply Now</a>
+                </li>
+            </ul>
+
+            <a href="./contact.html#contact-form" class="apply-now-btn desktop-apply-btn">Apply Now</a>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="page-header-container">
+            <h1 class="page-header-title">Our Courses</h1>
+            <p class="page-header-subtitle">Prepare for your international education journey with our expert-led courses
+            </p>
+        </div>
+    </section>
+
+    <section id="courses" class="courses-section">
+        <h2>Our Courses</h2>
+        <div class="courses-grid">
+
+            <!-- IELTS Academic Course -->
+            <div class="course-card">
+                <div class="course-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="course-category">English Proficiency</div>
+                </div>
+                <div class="course-card-content">
+                    <h3>IELTS Academic Course</h3>
+                    <p>Prepare for university studies with our comprehensive IELTS Academic Course. Learn effective
+                        test-taking strategies, improve your English skills, and achieve your target band score with
+                        expert guidance.</p>
+                    <a href="./enrollment.html">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- PTE Academic -->
+            <div class="course-card">
+                <div class="course-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="course-category">English Proficiency</div>
+                </div>
+                <div class="course-card-content">
+                    <h3>PTE Academic</h3>
+                    <p>Excel in PTE Academic with comprehensive training. Enhance language skills, ace exams, and
+                        achieve your study abroad goals with our expert-led PTE preparation course.</p>
+                    <a href="./enrollment.html">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- IELTS Life Skills -->
+            <div class="course-card">
+                <div class="course-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="course-category">English Proficiency</div>
+                </div>
+                <div class="course-card-content">
+                    <h3>IELTS Life Skills (AI/BI)</h3>
+                    <p>Attain practical language competence with IELTS Life Skills AI/BI. Develop essential skills for
+                        visa applications and everyday communication in English-speaking countries.</p>
+                    <a href="./enrollment.html">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- TOEFL Preparation -->
+            <div class="course-card">
+                <div class="course-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="course-category">English Proficiency</div>
+                </div>
+                <div class="course-card-content">
+                    <h3>TOEFL Preparation</h3>
+                    <p>Master the TOEFL iBT with our comprehensive preparation course. Focus on all four language skills
+                        - reading, listening, speaking, and writing - to achieve your best score.</p>
+                    <a href="./enrollment.html">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- GRE Preparation -->
+            <div class="course-card">
+                <div class="course-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="course-category">Graduate Studies</div>
+                </div>
+                <div class="course-card-content">
+                    <h3>GRE Preparation</h3>
+                    <p>Comprehensive GRE preparation for graduate school admissions. Master quantitative reasoning,
+                        verbal skills, and analytical writing with our expert instructors.</p>
+                    <a href="./enrollment.html">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- GMAT Preparation -->
+            <div class="course-card">
+                <div class="course-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')">
+                    <div class="course-category">Business Studies</div>
+                </div>
+                <div class="course-card-content">
+                    <h3>GMAT Preparation</h3>
+                    <p>Excel in the GMAT with our specialized course. Focus on quantitative, verbal, integrated
+                        reasoning, and analytical writing skills for business school success.</p>
+                    <a href="./enrollment.html">Enroll Now</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="footer-section">
+        <div id="footer-container">
+            <div id="footer-about">
+                <h2 id="footer-logo">smart Study Visa Consultants</h2>
+                <p id="footer-description">Your trusted partner for visa consultation and application services.</p>
+                <div id="footer-social-icons">
+                    <a href="#" class="social-icon" title="Facebook">f</a>
+                    <!-- <a href="#" class="social-icon" title="Twitter">𝕏</a>
+          <a href="#" class="social-icon" title="LinkedIn">in</a> -->
+                    <a href="#" class="social-icon" title="YouTube" style="color: red;"><i
+                            class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="social-icon" title="Instagram">📷</a>
+                </div>
+            </div>
+
+            <div id="footer-links">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-list">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./study-visa.html">Study Visa</a></li>
+                    <li><a href="./visit-visa.html">Visit Visa</a></li>
+                    <li><a href="./work-visa.html">Work Visa</a></li>
+                    <li><a href="./blog.html">Blog & Articles</a></li>
+                </ul>
+            </div>
+
+            <div id="footer-contact">
+                <h3 class="footer-heading">Contact Us</h3>
+                <ul class="footer-contact-list">
+                    <li><a href="mailto:info@smartstudy.com">info@smartstudy.com</a></li>
+                    <li><a href="tel:+923198590542">+923467897340</a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div id="footer-bottom">
+            <p>© 2025 Smart Study Visa Consultants. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/+923467897340" class="whatsapp-float" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp">
+    </a>
+
+    <script>
+        // Add entrance animation to course cards
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.course-card');
+
+            cards.forEach((card, index) => {
+                // Set initial state for animation
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+
+                // Animate cards with a slight delay between each
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

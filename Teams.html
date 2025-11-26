@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Team Gallery - Waterfall Layout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Team Section */
+        #team-section {
+            padding: 60px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #4299e1, #38b2ac);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #718096;
+            max-width: 600px;
+            margin: 25px auto 0;
+        }
+
+        /* Waterfall Grid Layout */
+        #team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-auto-rows: 10px;
+            gap: 25px;
+        }
+
+        /* Team Card */
+        .team-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            background-color: #fff;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Card Variations for Waterfall Layout */
+        .team-card:nth-child(3n+1) {
+            grid-row-end: span 16;
+        }
+
+        .team-card:nth-child(3n+2) {
+            grid-row-end: span 11;
+        }
+
+        .team-card:nth-child(3n+3) {
+            grid-row-end: span 14;
+        }
+
+        .team-card:nth-child(5n+4) {
+            grid-row-end: span 18;
+        }
+
+        .team-card:nth-child(5n+5) {
+            grid-row-end: span 17;
+        }
+
+        /* Team Image Container */
+        .team-image-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .team-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-card:hover .team-image {
+            transform: scale(1.08);
+        }
+
+        /* Team Content */
+        .team-content {
+            padding: 20px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 30%, rgba(255, 255, 255, 0.7) 70%, transparent 100%);
+            z-index: 2;
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #4299e1;
+            margin-bottom: 10px;
+        }
+
+        /* Team Overlay */
+        .team-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(26, 32, 44, 0.92) 0%, rgba(26, 32, 44, 0.7) 50%, rgba(26, 32, 44, 0.3) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            z-index: 3;
+        }
+
+        .team-card:hover .team-overlay {
+            opacity: 1;
+        }
+
+        /* Team Info */
+        .team-info {
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+            color: white;
+        }
+
+        .team-card:hover .team-info {
+            transform: translateY(0);
+        }
+
+        .overlay-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .overlay-role {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #e2e8f0;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .overlay-role::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #4299e1;
+            transition: width 0.3s ease;
+        }
+
+        .team-card:hover .overlay-role::after {
+            width: 60px;
+        }
+
+        .team-description {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        /* Social Icons */
+        .team-social {
+            display: flex;
+            margin-top: 10px;
+            gap: 12px;
+        }
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background-color: #4299e1;
+            transform: translateY(-3px);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding-top: 10%;
+            padding-bottom: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .page-header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-header-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive Design */
+        /* Large Desktop */
+        @media (max-width: 1440px) {
+            #team-section {
+                padding: 50px 20px;
+            }
+            
+            .page-header {
+                padding-top: 12%;
+            }
+        }
+
+        /* Laptop */
+        @media (max-width: 1200px) {
+            #team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+                gap: 20px;
+            }
+
+            .team-card:nth-child(3n+1),
+            .team-card:nth-child(3n+2),
+            .team-card:nth-child(3n+3),
+            .team-card:nth-child(5n+4),
+            .team-card:nth-child(5n+5) {
+                grid-row-end: span 16;
+            }
+            
+            .page-header {
+                padding-top: 15%;
+            }
+            
+            .page-header-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Tablet */
+        @media (max-width: 992px) {
+            #team-section {
+                padding: 40px 15px;
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+
+            #team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 18px;
+            }
+
+            .team-overlay {
+                padding: 20px;
+            }
+            
+            .page-header {
+                padding-top: 18%;
+            }
+            
+            .page-header-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Small Tablet */
+        @media (max-width: 768px) {
+            #team-section {
+                padding: 35px 15px;
+            }
+
+            .section-header {
+                margin-bottom: 40px;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .section-header p {
+                font-size: 1rem;
+                margin: 20px auto 0;
+            }
+
+            #team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 16px;
+            }
+
+            .team-content {
+                padding: 16px;
+            }
+
+            .team-name {
+                font-size: 1.2rem;
+            }
+
+            .team-role {
+                font-size: 0.9rem;
+            }
+
+            .overlay-name {
+                font-size: 1.3rem;
+            }
+
+            .overlay-role {
+                font-size: 0.95rem;
+            }
+
+            .team-description {
+                font-size: 0.85rem;
+            }
+            
+            .page-header {
+                padding-top: 22%;
+            }
+            
+            .page-header-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            #team-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+                gap: 20px;
+            }
+
+            .team-card:nth-child(3n+1),
+            .team-card:nth-child(3n+2),
+            .team-card:nth-child(3n+3),
+            .team-card:nth-child(5n+4),
+            .team-card:nth-child(5n+5) {
+                grid-row-end: span 20;
+            }
+
+            .team-overlay {
+                padding: 18px;
+            }
+            
+            .page-header {
+                padding-top: 25%;
+                padding-bottom: 30px;
+            }
+            
+            .page-header-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            #team-section {
+                padding: 30px 10px;
+            }
+
+            .section-header {
+                margin-bottom: 30px;
+            }
+
+            .section-header h2 {
+                font-size: 1.75rem;
+            }
+
+            .section-header p {
+                font-size: 0.95rem;
+                padding: 0 10px;
+            }
+
+            .team-content {
+                padding: 14px;
+            }
+
+            .team-name {
+                font-size: 1.1rem;
+            }
+
+            .team-role {
+                font-size: 0.85rem;
+            }
+
+            .overlay-name {
+                font-size: 1.2rem;
+            }
+
+            .overlay-role {
+                font-size: 0.9rem;
+            }
+
+            .team-description {
+                font-size: 0.8rem;
+            }
+
+            .social-icon {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .page-header {
+                padding-top: 30%;
+                padding-bottom: 25px;
+            }
+            
+            .page-header-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Extra Small Mobile */
+        @media (max-width: 360px) {
+            #team-grid {
+                gap: 15px;
+            }
+
+            .team-overlay {
+                padding: 15px;
+            }
+
+            .team-content {
+                padding: 12px;
+            }
+            
+            .page-header {
+                padding-top: 35%;
+            }
+            
+            .page-header-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) {
+            .team-card:hover {
+                transform: none;
+            }
+            
+            .team-card:active {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar container">
+            <a href="index.html" class="logo">Smart Study</a>
+
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="study-visa.html">Study Visa</a></li>
+                <li><a href="visit-visa.html">Visit Visa</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="blog.html">Blog & Articles</a></li>
+                <li class="nav-item nav-item--dropdown">
+                    <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                        More
+                        <span class="nav-dropdown-caret" aria-hidden="true"></span>
+                    </button>
+                    <ul class="nav-dropdown" role="menu">
+                        <li><a href="./Teams.html" role="menuitem">Teams</a></li>
+                        <li><a href="./cources.html" role="menuitem">Courses</a></li>
+                        <li><a href="./branches.html" role="menuitem">Branches</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li class="mobile-apply-btn-container">
+                    <a href="./contact.html#contact-form" class="apply-now-btn mobile-apply-btn">Apply Now</a>
+                </li>
+            </ul>
+
+            <a href="./contact.html#contact-form" class="apply-now-btn desktop-apply-btn">Apply Now</a>
+        </nav>
+    </header>
+    
+    <section class="page-header">
+        <div class="page-header-container">
+            <h1 class="page-header-title">Our Team</h1>
+        </div>
+    </section>
+
+    <section id="team-section">
+        <div class="section-header">
+            <h2>Meet Our Team</h2>
+            <p>Passionate professionals dedicated to delivering exceptional results</p>
+        </div>
+        
+        <div id="team-grid">
+            <!-- Team Member 1 -->
+            <div class="team-card">
+                <div class="team-image-container">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                        alt="Alex Johnson" class="team-image">
+                </div>
+                <div class="team-content">
+                    <h3 class="team-name">Alex Johnson</h3>
+                    <p class="team-role">Creative Director</p>
+                </div>
+                <div class="team-overlay">
+                    <div class="team-info">
+                        <h3 class="overlay-name">Alex Johnson</h3>
+                        <p class="overlay-role">Creative Director</p>
+                        <p class="team-description">Alex leads our creative vision with over 10 years of experience in
+                            design and brand strategy.</p>
+                        <div class="team-social">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="team-card">
+                <div class="team-image-container">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                        alt="Sarah Williams" class="team-image">
+                </div>
+                <div class="team-content">
+                    <h3 class="team-name">Sarah Williams</h3>
+                    <p class="team-role">Lead Developer</p>
+                </div>
+                <div class="team-overlay">
+                    <div class="team-info">
+                        <h3 class="overlay-name">Sarah Williams</h3>
+                        <p class="overlay-role">Lead Developer</p>
+                        <p class="team-description">Sarah specializes in creating robust, scalable applications with
+                            cutting-edge technologies.</p>
+                        <div class="team-social">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="team-card">
+                <div class="team-image-container">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                        alt="Michael Chen" class="team-image">
+                </div>
+                <div class="team-content">
+                    <h3 class="team-name">Michael Chen</h3>
+                    <p class="team-role">Marketing Director</p>
+                </div>
+                <div class="team-overlay">
+                    <div class="team-info">
+                        <h3 class="overlay-name">Michael Chen</h3>
+                        <p class="overlay-role">Marketing Director</p>
+                        <p class="team-description">Michael drives our marketing strategies with data-driven insights
+                            and innovative campaigns.</p>
+                        <div class="team-social">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="team-card">
+                <div class="team-image-container">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                        alt="Emily Rodriguez" class="team-image">
+                </div>
+                <div class="team-content">
+                    <h3 class="team-name">Emily Rodriguez</h3>
+                    <p class="team-role">UX Designer</p>
+                </div>
+                <div class="team-overlay">
+                    <div class="team-info">
+                        <h3 class="overlay-name">Emily Rodriguez</h3>
+                        <p class="overlay-role">UX Designer</p>
+                        <p class="team-description">Emily crafts intuitive user experiences that delight customers and
+                            drive engagement.</p>
+                        <div class="team-social">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-behance"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-dribbble"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 5 -->
+            <div class="team-card">
+                <div class="team-image-container">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                        alt="David Kim" class="team-image">
+                </div>
+                <div class="team-content">
+                    <h3 class="team-name">David Kim</h3>
+                    <p class="team-role">Project Manager</p>
+                </div>
+                <div class="team-overlay">
+                    <div class="team-info">
+                        <h3 class="overlay-name">David Kim</h3>
+                        <p class="overlay-role">Project Manager</p>
+                        <p class="team-description">David ensures our projects are delivered on time, within scope, and
+                            exceeding expectations.</p>
+                        <div class="team-social">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-slack"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 6 -->
+            <div class="team-card">
+                <div class="team-image-container">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                        alt="Olivia Parker" class="team-image">
+                </div>
+                <div class="team-content">
+                    <h3 class="team-name">Olivia Parker</h3>
+                    <p class="team-role">Content Strategist</p>
+                </div>
+                <div class="team-overlay">
+                    <div class="team-info">
+                        <h3 class="overlay-name">Olivia Parker</h3>
+                        <p class="overlay-role">Content Strategist</p>
+                        <p class="team-description">Olivia develops compelling content strategies that connect brands
+                            with their audiences.</p>
+                        <div class="team-social">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-medium"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer-section">
+        <div id="footer-container">
+            <div id="footer-about">
+                <h2 id="footer-logo">Smart Study Visa Consultants</h2>
+                <p id="footer-description">Your trusted partner for visa consultation and application services.</p>
+                <div id="footer-social-icons">
+                    <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" title="YouTube" style="color: white;"><i
+                            class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div id="footer-links">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-list">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./study-visa.html">Study Visa</a></li>
+                    <li><a href="./visit-visa.html">Visit Visa</a></li>
+                    <li><a href="./work-visa.html">Work Visa</a></li>
+                    <li><a href="./blog.html">Blog & Articles</a></li>
+                </ul>
+            </div>
+            <div id="footer-contact">
+                <h3 class="footer-heading">Contact Us</h3>
+                <ul class="footer-contact-list">
+                    <li><a href="mailto:info@smartstudy.com">info@smartstudy.com</a></li>
+                    <li><a href="tel:+923467897340">+92 346 7897340</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="footer-bottom">
+            <p>© 2025 Smart Study Visa Consultants. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/+923467897340" class="whatsapp-float" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp">
+    </a>
+
+
+    <script>
+        // Add a subtle entrance animation to cards
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.team-card');
+
+            cards.forEach((card, index) => {
+                // Set initial state for animation
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+
+                // Animate cards with a slight delay between each
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

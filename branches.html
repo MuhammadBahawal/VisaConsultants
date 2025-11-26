@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Our Branches - Smart Study</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding-top: 12%;
+            padding-bottom: 60px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .page-header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-header-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .page-header-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Branches Section */
+        .branches-section {
+            padding: 60px 20px 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .branches-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #1a202c;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .branches-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 4px;
+            background: linear-gradient(to right, #4299e1, #38b2ac);
+            border-radius: 2px;
+        }
+
+        /* Branch Item - Responsive Layout */
+        .branch-item {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            transition: all 0.4s ease;
+        }
+
+        .branch-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .branch-row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .branch-map-col {
+            flex: 1 1 100%;
+            height: 320px;
+            background: #e5e7eb;
+        }
+
+        .branch-map-col img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .branch-info-col {
+            flex: 1 1 100%;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Desktop & Large Tablet - Side by Side */
+        @media (min-width: 992px) {
+            .branch-row {
+                flex-wrap: nowrap;
+            }
+
+            .branch-map-col {
+                flex: 0 0 50%;
+                height: auto;
+            }
+
+            .branch-info-col {
+                flex: 0 0 50%;
+            }
+        }
+
+        .branch-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+        }
+
+        .branch-title i {
+            margin-right: 12px;
+            color: #667eea;
+        }
+
+        .branch-address {
+            font-size: 1.05rem;
+            color: #4a5568;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 1rem;
+            color: #2d3748;
+        }
+
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 14px;
+            font-size: 0.95rem;
+        }
+
+        .contact-item a {
+            color: #2d3748;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: #4299e1;
+        }
+
+        .branch-social {
+            display: flex;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: #4299e1;
+            color: white;
+            transform: translateY(-4px);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .page-header {
+                padding-top: 15%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .page-header {
+                padding-top: 20%;
+            }
+
+            .branch-map-col {
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header-title {
+                font-size: 2.5rem;
+            }
+
+            .branches-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .branch-info-col {
+                padding: 28px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .branch-map-col {
+                height: 240px;
+            }
+
+            .branch-info-col {
+                padding: 24px;
+            }
+
+            .branch-title {
+                font-size: 1.4rem;
+            }
+
+            .contact-item i {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- YOUR ORIGINAL NAVBAR (UNCHANGED) -->
+    <header class="header">
+        <nav class="navbar container">
+            <a href="index.html" class="logo">Smart Study</a>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="study-visa.html">Study Visa</a></li>
+                <li><a href="visit-visa.html">Visit Visa</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="blog.html">Blog & Articles</a></li>
+                <li class="nav-item nav-item--dropdown">
+                    <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                        More <span class="nav-dropdown-caret" aria-hidden="true"></span>
+                    </button>
+                    <ul class="nav-dropdown" role="menu">
+                        <li><a href="./Teams.html" role="menuitem">Teams</a></li>
+                        <li><a href="./cources.html" role="menuitem">Courses</a></li>
+                        <li><a href="./branches.html" role="menuitem">Branches</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li class="mobile-apply-btn-container">
+                    <a href="./contact.html#contact-form" class="apply-now-btn mobile-apply-btn">Apply Now</a>
+                </li>
+            </ul>
+            <a href="./contact.html#contact-form" class="apply-now-btn desktop-apply-btn">Apply Now</a>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-container">
+            <h1 class="page-header-title">Our Branches</h1>
+            <p class="page-header-subtitle">Visit any of our conveniently located branches across Pakistan for
+                personalized consultation</p>
+        </div>
+    </section>
+
+    <!-- Branches Section -->
+    <section class="branches-section">
+        <h2>Find a Branch Near You</h2>
+
+        <!-- Branch 1 - Lahore DHA -->
+        <div class="branch-item">
+            <div class="branch-row">
+                <div class="branch-map-col">
+                    <img src="https://images.unsplash.com/photo-1565967320130-0f2c3b7e4e95?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                        alt="Lahore DHA Map">
+                </div>
+                <div class="branch-info-col">
+                    <h3 class="branch-title"><i class="fas fa-map-marker-alt"></i> Lahore DHA Office</h3>
+                    <p class="branch-address">1st Floor Plaza No. Y-213, DHA Phase 3, Near ChenOne, Lahore</p>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:bilal@edify.pk">bilal@edify.pk</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+923041114444">+92 304 111 4444</a>
+                    </div>
+                    <div class="branch-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Branch 2 - Islamabad -->
+        <div class="branch-item">
+            <div class="branch-row">
+                <div class="branch-map-col">
+                    <img src="https://images.unsplash.com/photo-1585208798174-6cedd78e0198?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                        alt="Islamabad Map">
+                </div>
+                <div class="branch-info-col">
+                    <h3 class="branch-title"><i class="fas fa-map-marker-alt"></i> Islamabad F-7 Office</h3>
+                    <p class="branch-address">Office #12, 2nd Floor, Beverly Centre, Jinnah Avenue, F-7 Markaz,
+                        Islamabad</p>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:islamabad@smartstudy.com">islamabad@smartstudy.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+923331112233">+92 333 111 2233</a>
+                    </div>
+                    <div class="branch-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Branch 3 - Karachi Clifton -->
+        <div class="branch-item">
+            <div class="branch-row">
+                <div class="branch-map-col">
+                    <img src="https://images.unsplash.com/photo-1599663253166-9e3937e8e09f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                        alt="Karachi Map">
+                </div>
+                <div class="branch-info-col">
+                    <h3 class="branch-title"><i class="fas fa-map-marker-alt"></i> Karachi Clifton Office</h3>
+                    <p class="branch-address">Suite 305, The Forum Mall, Block 9, Clifton, Karachi</p>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:karachi@smartstudy.com">karachi@smartstudy.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+923212223344">+92 321 222 3344</a>
+                    </div>
+                    <div class="branch-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Branch 4 - Faisalabad -->
+        <div class="branch-item">
+            <div class="branch-row">
+                <div class="branch-map-col">
+                    <img src="https://images.unsplash.com/photo-1570545887591-7195a7c0f3d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                        alt="Faisalabad Map">
+                </div>
+                <div class="branch-info-col">
+                    <h3 class="branch-title"><i class="fas fa-map-marker-alt"></i> Faisalabad Office</h3>
+                    <p class="branch-address">Office No. 8, Kohinoor City, Main Jaranwala Road, Faisalabad</p>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:faisalabad@smartstudy.com">faisalabad@smartstudy.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+923411115566">+92 341 111 5566</a>
+                    </div>
+                    <div class="branch-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Branch 5 - Multan -->
+        <div class="branch-item">
+            <div class="branch-row">
+                <div class="branch-map-col">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fcbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                        alt="Multan Map">
+                </div>
+                <div class="branch-info-col">
+                    <h3 class="branch-title"><i class="fas fa-map-marker-alt"></i> Multan Cantt Office</h3>
+                    <p class="branch-address">Office 204, 2nd Floor, Mall Plaza, Multan Cantt, Multan</p>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:multan@smartstudy.com">multan@smartstudy.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+923001112277">+92 300 111 2277</a>
+                    </div>
+                    <div class="branch-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- YOUR ORIGINAL FOOTER (UNCHANGED) -->
+    <footer id="footer-section">
+        <div id="footer-container">
+            <div id="footer-about">
+                <h2 id="footer-logo">Smart Study Visa Consultants</h2>
+                <p id="footer-description">Your trusted partner for visa consultation and application services.</p>
+                <div id="footer-social-icons">
+                    <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" title="YouTube" style="color: white;"><i
+                            class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div id="footer-links">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-list">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./study-visa.html">Study Visa</a></li>
+                    <li><a href="./visit-visa.html">Visit Visa</a></li>
+                    <li><a href="./work-visa.html">Work Visa</a></li>
+                    <li><a href="./blog.html">Blog & Articles</a></li>
+                </ul>
+            </div>
+            <div id="footer-contact">
+                <h3 class="footer-heading">Contact Us</h3>
+                <ul class="footer-contact-list">
+                    <li><a href="mailto:info@smartstudy.com">info@smartstudy.com</a></li>
+                    <li><a href="tel:+923467897340">+92 346 7897340</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="footer-bottom">
+            <p>© 2025 Smart Study Visa Consultants. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/+923467897340" class="whatsapp-float" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp">
+    </a>
+
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

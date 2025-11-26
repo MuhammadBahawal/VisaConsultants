@@ -1,0 +1,62 @@
+
+    .reusable-page-header {
+        padding: 140px 20px 80px;
+        text-align: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .reusable-page-header::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.05);
+        z-index: 1;
+    }
+
+    .page-header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    .page-header-title {
+        font-size: 3.2rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        letter-spacing: -0.5px;
+    }
+
+    .page-header-subtitle {
+        font-size: 1.25rem;
+        max-width: 800px;
+        margin: 0 auto;
+        opacity: 0.95;
+        line-height: 1.6;
+    }
+
+    /* Fully Responsive */
+    @media (max-width: 1200px) {
+        .reusable-page-header { padding: 130px 20px 70px; }
+        .page-header-title { font-size: 2.9rem; }
+    }
+    @media (max-width: 992px) {
+        .reusable-page-header { padding: 120px 20px 65px; }
+        .page-header-title { font-size: 2.6rem; }
+    }
+    @media (max-width: 768px) {
+        .reusable-page-header { padding: 110px 20px 60px; }
+        .page-header-title { font-size: 2.4rem; }
+        .page-header-subtitle { font-size: 1.15rem; }
+    }
+    @media (max-width: 576px) {
+        .reusable-page-header { padding: 100px 15px 55px; }
+        .page-header-title { font-size: 2.1rem; }
+        .page-header-subtitle { font-size: 1.1rem; padding: 0 10px; }
+    }
+    @media (max-width: 400px) {
+        .page-header-title { font-size: 1.9rem; }
+    }
