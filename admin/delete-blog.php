@@ -6,16 +6,8 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "visa_consultants";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Use centralized database configuration
+require_once '../includes/db.php';
 
 if (isset($_GET['id'])) {
     $id = (int)$_GET['id'];

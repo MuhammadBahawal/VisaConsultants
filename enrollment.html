@@ -15,6 +15,11 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Course Enrollment | Smart Study Consultants</title>
   <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="icon" type="image/png" href="./assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="./assets/images/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="./assets/images/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="./assets/images/favicon/site.webmanifest" />
   <style>
     .enrollment-hero {
       background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 30%, rgba(255, 255, 255, 0.7) 70%, transparent 100%);
@@ -259,6 +264,160 @@
       transform: translateX(-4px);
     }
 
+    /* File Upload Styling */
+    .file-upload-wrapper {
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .file-upload-inner {
+      position: relative;
+      border: 3px dashed #cbd5e0;
+      border-radius: 16px;
+      padding: 40px 30px;
+      text-align: center;
+      background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+
+    .file-upload-inner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(159, 8, 8, 0.05) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .file-upload-wrapper:hover .file-upload-inner,
+    .file-upload-wrapper:has(#document:focus) .file-upload-inner {
+      border-color: #9f0808;
+      background: linear-gradient(135deg, rgba(159, 8, 8, 0.02) 0%, rgba(159, 8, 8, 0.04) 100%);
+      box-shadow: 0 8px 24px rgba(159, 8, 8, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .file-upload-wrapper:has(#document:focus) .file-upload-inner::before {
+      opacity: 1;
+    }
+
+    #document {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      cursor: pointer;
+    }
+
+    .file-upload-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .file-upload-content i {
+      font-size: 3.5rem;
+      color: #9f0808;
+      transition: all 0.3s ease;
+    }
+
+    .file-upload-wrapper:hover .file-upload-content i,
+    .file-upload-wrapper:has(#document:focus) .file-upload-content i {
+      font-size: 4rem;
+      color: #9f0808;
+      animation: bounce 0.6s ease infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .file-upload-text {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #2d3748;
+      letter-spacing: -0.5px;
+    }
+
+    .file-upload-subtext {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #718096;
+      font-weight: 500;
+    }
+
+    .file-upload-wrapper:hover .file-upload-text,
+    .file-upload-wrapper:has(#document:focus) .file-upload-text {
+      color: #9f0808;
+    }
+
+    .file-name {
+      position: relative;
+      z-index: 2;
+      display: inline-block;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      color: #2d3748;
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .file-upload-wrapper:has(#document:valid) .file-name {
+      color: #10B981;
+      border-color: #10B981;
+      background: rgba(16, 185, 129, 0.05);
+      box-shadow: 0 2px 12px rgba(16, 185, 129, 0.15);
+      font-weight: 600;
+    }
+
+    .file-upload-wrapper:hover .file-name,
+    .file-upload-wrapper:has(#document:focus) .file-name {
+      border-color: #9f0808;
+      box-shadow: 0 4px 12px rgba(159, 8, 8, 0.15);
+    }
+
+    .file-format-info {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #718096;
+      font-weight: 500;
+    }
+
+    .file-format-info i {
+      font-size: 0.9rem;
+      color: #cbd5e0;
+    }
+
     /* Responsive Design */
     @media (max-width: 968px) {
       .enrollment-container {
@@ -318,7 +477,7 @@
 <body>
   <header class="header">
     <nav class="navbar container">
-                  <a href="index.html" class="logo"><img width="150px" height="150px" src="./assets/images/logo.png" alt=""></a>
+      <a href="index.html" class="logo"><img width="150px" height="150px" src="./assets/images/logo.jpeg" alt=""></a>
 
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
         <i class="fa-solid fa-bars"></i>
@@ -326,20 +485,11 @@
 
       <ul class="nav-links">
         <li><a href="study-visa.html">Study Visa</a></li>
-        <li><a href="visit-visa.html">Visit Visa</a></li>
-        <li><a href="privacy-policy.html">Privacy Policy</a></li>
         <li><a href="blog.html">Blog & Articles</a></li>
-        <li class="nav-item nav-item--dropdown">
-          <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-            More
-            <span class="nav-dropdown-caret" aria-hidden="true"></span>
-          </button>
-          <ul class="nav-dropdown" role="menu">
-            <li><a href="./Teams.html" role="menuitem">Teams</a></li>
-            <li><a href="./cources.html" role="menuitem">Courses</a></li>
-            <li><a href="./branches.html" role="menuitem">Branches</a></li>
-          </ul>
-        </li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="./Teams.html" role="menuitem">Teams</a></li>
+        <li><a href="./cources.html" role="menuitem">Courses</a></li>
+        <li><a href="./branches.html" role="menuitem">Branches</a></li>
         <li><a href="contact.html">Contact Us</a></li>
         <li class="mobile-apply-btn-container">
           <a href="./contact.html#contact-form" class="apply-now-btn mobile-apply-btn">Apply Now</a>
@@ -349,6 +499,7 @@
       <a href="./contact.html#contact-form" class="apply-now-btn desktop-apply-btn">Apply Now</a>
     </nav>
   </header>
+
 
   <div class="main">
     <section class="enrollment-hero">
@@ -463,6 +614,24 @@
               </div>
             </div>
 
+            <div>
+              <label for="document">Upload Your Document *</label>
+              <div class="file-upload-wrapper">
+                <div class="file-upload-inner">
+                  <input id="document" name="document" type="file" required accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                    title="Supported formats: PDF, Word, JPG, PNG" />
+                  <div class="file-upload-content">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <p class="file-upload-text">Drag & drop your document here</p>
+                    <p class="file-upload-subtext">or click to browse</p>
+                  </div>
+                  <span class="file-name">No file chosen</span>
+                </div>
+              </div>
+              <small class="file-format-info"><i class="fa-solid fa-info-circle"></i> Supported: PDF, Word (DOC/DOCX),
+                Images (JPG/PNG)</small>
+            </div>
+
             <button type="submit" id="submit-btn">
               <i class="fa-solid fa-paper-plane"></i> Submit Enrollment
             </button>
@@ -482,8 +651,10 @@
         <h2 id="footer-logo">Smart Study Consultants</h2>
         <p id="footer-description">Your trusted partner for visa consultation and application services.</p>
         <div id="footer-social-icons">
-          <a href="https://youtube.com/@smartstudyconsultant?si=80cVrJhEajZP1Bl_" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-           <a href="https://youtube.com/@smartstudyconsultant?si=80cVrJhEajZP1Bl_" class="social-icon" title="YouTube" style="color: white;"><i class="fab fa-youtube"></i></a>
+          <a href="https://youtube.com/@smartstudyconsultant?si=80cVrJhEajZP1Bl_" class="social-icon"
+            title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://youtube.com/@smartstudyconsultant?si=80cVrJhEajZP1Bl_" class="social-icon" title="YouTube"
+            style="color: white;"><i class="fab fa-youtube"></i></a>
           <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
           <a href="#" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
@@ -527,12 +698,75 @@
         document.getElementById('course-select').value = course;
       }
 
+      // Handle file input display
+      const documentInput = document.getElementById('document');
+      const fileNameDisplay = document.querySelector('.file-name');
+
+      documentInput.addEventListener('change', function () {
+        if (this.files && this.files[0]) {
+          const file = this.files[0];
+
+          // Validate file type
+          const allowedFormats = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/png'];
+          if (!allowedFormats.includes(file.type)) {
+            showPopup('Only PDF, Word, JPG, and PNG files are allowed', 'error');
+            this.value = '';
+            fileNameDisplay.textContent = 'No file chosen';
+            return;
+          }
+
+          fileNameDisplay.textContent = file.name;
+        } else {
+          fileNameDisplay.textContent = 'No file chosen';
+        }
+      });
+
+      // Make file upload wrapper clickable
+      const fileUploadWrapper = document.querySelector('.file-upload-wrapper');
+      fileUploadWrapper.addEventListener('click', function () {
+        documentInput.click();
+      });
+
+      // Handle drag and drop
+      fileUploadWrapper.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        fileUploadWrapper.style.borderColor = '#9f0808';
+        fileUploadWrapper.style.background = 'rgba(159, 8, 8, 0.05)';
+      });
+
+      fileUploadWrapper.addEventListener('dragleave', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        fileUploadWrapper.style.borderColor = '#e2e8f0';
+        fileUploadWrapper.style.background = '#f7fafc';
+      });
+
+      fileUploadWrapper.addEventListener('drop', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        fileUploadWrapper.style.borderColor = '#e2e8f0';
+        fileUploadWrapper.style.background = '#f7fafc';
+
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          documentInput.files = e.dataTransfer.files;
+          const event = new Event('change', { bubbles: true });
+          documentInput.dispatchEvent(event);
+        }
+      });
+
       // Handle form submission
       const form = document.getElementById('enrollment-form');
       const submitBtn = document.getElementById('submit-btn');
 
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
+
+        // Validate file is selected
+        if (!documentInput.files || !documentInput.files[0]) {
+          showPopup('Please upload a document', 'error');
+          return;
+        }
 
         const originalBtnText = submitBtn.innerHTML;
         submitBtn.disabled = true;
@@ -554,6 +788,7 @@
           if (data.success) {
             showPopup(data.message, 'success');
             form.reset();
+            fileNameDisplay.textContent = 'No file chosen';
             setTimeout(() => {
               window.location.href = 'index.html';
             }, 2000);

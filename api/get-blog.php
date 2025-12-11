@@ -1,18 +1,9 @@
 <?php
 header('Content-Type: application/json');
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "visa_consultants";
+// Use centralized database configuration
+require_once '../includes/db.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Database connection failed']);
-    exit;
-}
 
 // If a slug is provided, return single blog (prepared statement); otherwise return all blogs.
 if (!empty($_GET['slug'])) {

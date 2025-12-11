@@ -71,44 +71,16 @@ if ($resultSubs) {
     $resultSubs->free();
 }
 
-// Get enrollments from course_enrollment database
-$enrollmentDb = new mysqli('localhost', 'root', '');
-if (!$enrollmentDb->connect_error) {
-    // Check if database exists, create if not
-    $dbExists = $enrollmentDb->query("SHOW DATABASES LIKE 'course_enrollment'");
-    if ($dbExists && $dbExists->num_rows == 0) {
-        $enrollmentDb->query("CREATE DATABASE IF NOT EXISTS course_enrollment");
+
+// Get enrollments from visa_consultants database (they're now in the same database)
+$resultEnrollments = $conn->query("SELECT * FROM enrollments ORDER BY created_at DESC");
+if ($resultEnrollments) {
+    while ($row = $resultEnrollments->fetch_assoc()) {
+        $enrollments[] = $row;
     }
-    $enrollmentDb->select_db('course_enrollment');
-    
-    // Check if table exists, create if not
-    $tableExists = $enrollmentDb->query("SHOW TABLES LIKE 'enrollments'");
-    if ($tableExists && $tableExists->num_rows == 0) {
-        $createTable = "CREATE TABLE IF NOT EXISTS enrollments (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            first_name VARCHAR(50) NOT NULL,
-            last_name VARCHAR(50) NOT NULL,
-            email VARCHAR(100) NOT NULL,
-            phone VARCHAR(20) NOT NULL,
-            city VARCHAR(50),
-            nationality VARCHAR(50),
-            course VARCHAR(100) NOT NULL,
-            course_type VARCHAR(50) NOT NULL,
-            delivery_mode VARCHAR(20) NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )";
-        $enrollmentDb->query($createTable);
-    }
-    
-    $resultEnrollments = $enrollmentDb->query("SELECT * FROM enrollments ORDER BY created_at DESC");
-    if ($resultEnrollments) {
-        while ($row = $resultEnrollments->fetch_assoc()) {
-            $enrollments[] = $row;
-        }
-        $resultEnrollments->free();
-    }
-    $enrollmentDb->close();
+    $resultEnrollments->free();
 }
+
 
 // Get applications from applications table
 $resultApplications = $conn->query("SELECT * FROM applications ORDER BY created_at DESC");
@@ -667,7 +639,7 @@ $conn->close();
             <nav class="sidebar-nav">
                 <a href="dashboard.php" class="active">📊 Dashboard</a>
                 <a href="#applications-section">📋 Applications</a>
-                <a href="#contacts-section">📩 Contact Messages</a>
+                <!-- <a href="#contacts-section">📩 Contact Messages</a> -->
                 <a href="#enrollments-section">🎓 Course Enrollments</a>
                 <a href="add-blog.php">➕ Add Blog</a>
                 <a href="youtube-videos.php">🎬 YouTube Videos</a>
@@ -769,8 +741,8 @@ $conn->close();
                     </tbody>
                 </table>
             </div>
-
-            <h2 id="contacts-section" class="dashboard-title" style="margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem;">Contact Messages</h2>
+<!-- 
+            <h2 id="contacts-section" class="dashboard-title" style="margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem;">Contact Messages</h2> -->
             <div class="blogs-table">
                 <?php if (!empty($contacts)): ?>
                     <div style="overflow-x: auto;">
@@ -804,9 +776,9 @@ $conn->close();
                         </table>
                     </div>
                 <?php else: ?>
-                    <div class="empty-state">
+                    <!-- <div class="empty-state">
                         <p>No contact messages found yet.</p>
-                    </div>
+                    </div> -->
                 <?php endif; ?>
             </div>
 
@@ -870,6 +842,7 @@ $conn->close();
                                     <th>Delivery Mode</th>
                                     <th>City</th>
                                     <th>Nationality</th>
+                                    <th>Document</th>
                                     <th>Date</th>
                                     <th>Actions</th>
                                 </tr>
@@ -885,6 +858,7 @@ $conn->close();
                                         <td><?php echo htmlspecialchars($enrollment['delivery_mode']); ?></td>
                                         <td><?php echo htmlspecialchars($enrollment['city'] ?: 'N/A'); ?></td>
                                         <td><?php echo htmlspecialchars($enrollment['nationality'] ?: 'N/A'); ?></td>
+                                        <td><?php echo !empty($enrollment['document_filename']) ? htmlspecialchars(substr($enrollment['document_filename'], 0, 25)) . '...' : '<span style="color: #a0aec0;">No file</span>'; ?></td>
                                         <td><?php echo htmlspecialchars($enrollment['created_at']); ?></td>
                                         <td class="action-btns">
                                             <a href="delete-enrollment.php?id=<?php echo $enrollment['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this enrollment?');">Delete</a>

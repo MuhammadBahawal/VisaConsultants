@@ -7,16 +7,25 @@ if (isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Database configuration
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "visa_consultants";
+// Use centralized database configuration
+require_once '../includes/db.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// Create users table if it doesn't exist
+$createUsersTable = "CREATE TABLE IF NOT EXISTS users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+$conn->query($createUsersTable);
+
+// Insert default admin user if table is empty
+$checkAdmin = $conn->query("SELECT id FROM users LIMIT 1");
+if ($checkAdmin && $checkAdmin->num_rows == 0) {
+    $defaultPassword = password_hash('admin123', PASSWORD_BCRYPT);
+    $conn->query("INSERT INTO users (username, email, password) VALUES ('ahsan@911', 'ahsan@gmail.com', '$defaultPassword')");
 }
 
 $error = '';

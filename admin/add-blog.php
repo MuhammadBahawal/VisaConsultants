@@ -6,16 +6,9 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "visa_consultants";
+// Use centralized database configuration
+require_once '../includes/db.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 $isEdit = false;
 $blog = null;
@@ -119,11 +112,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $excludeId = $isEdit ? $blog['id'] : null;
         $slug = generateUniqueSlug($conn, $slug, $excludeId);
 
-        // ✅ INSERT OR UPDATE IN BLOGS TABLE (NOT blog_posts)
+        // ✅ INSERT OR UPDATE IN BLOGS TABLE
         if ($isEdit) {
             // UPDATE existing blog
-            $stmt = $conn->prepare("UPDATE blogs SET title=?, slug=?, category=?, image_url=?, short_description=?, content=? WHERE id=?");
-            $stmt->bind_param('ssssssi', $title, $slug, $category, $final_image, $short_description, $content, $blog['id']);
+            if ($image_blob_data !== null) {
+                // Update with new uploaded image
+                $stmt = $conn->prepare("UPDATE blogs SET title=?, slug=?, category=?, image_url=?, image_data=?, image_filename=?, image_mime_type=?, image_size=?, short_description=?, content=? WHERE id=?");
+                $stmt->bind_param('ssssbssissi', $title, $slug, $category, $final_image, $image_blob_data, $image_filename, $image_mime, $image_size, $short_description, $content, $blog['id']);
+                $stmt->send_long_data(4, $image_blob_data);
+            } else {
+                // Update without changing image
+                $stmt = $conn->prepare("UPDATE blogs SET title=?, slug=?, category=?, image_url=?, short_description=?, content=? WHERE id=?");
+                $stmt->bind_param('ssssssi', $title, $slug, $category, $final_image, $short_description, $content, $blog['id']);
+            }
             
             if ($stmt->execute()) {
                 header('Location: ./dashboard.php?msg=updated');
@@ -133,9 +134,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } else {
             // INSERT new blog
-            $stmt = $conn->prepare("INSERT INTO blogs (title, slug, category, image_url, short_description, content, author_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO blogs (title, slug, category, image_url, image_data, image_filename, image_mime_type, image_size, short_description, content, author_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $author_id = $_SESSION['user_id'] ?? 1;
-            $stmt->bind_param('ssssssi', $title, $slug, $category, $final_image, $short_description, $content, $author_id);
+            $stmt->bind_param('ssssbssissi', $title, $slug, $category, $final_image, $image_blob_data, $image_filename, $image_mime, $image_size, $short_description, $content, $author_id);
+            
+            if ($image_blob_data !== null) {
+                $stmt->send_long_data(4, $image_blob_data);
+            }
             
             if ($stmt->execute()) {
                 header('Location: ./dashboard.php?msg=created');

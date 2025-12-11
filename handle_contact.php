@@ -17,12 +17,9 @@ if ($name === '' || $email === '' || $phone === '' || $subject === '' || $messag
     exit;
 }
 
-$servername = "localhost";
-$username   = "root";
-$password   = "";
-$dbname     = "visa_consultants";
+// Use centralized database configuration
+require_once 'includes/db.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     header('Location: contact.html?error=db_connect');

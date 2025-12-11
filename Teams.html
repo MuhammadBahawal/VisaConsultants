@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/pageheaders.css">
     <title>Team Gallery - Waterfall Layout</title>
+    <link rel="icon" type="image/png" href="./assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./assets/images/favicon/site.webmanifest" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Base Styles */
@@ -274,7 +279,7 @@
             #team-section {
                 padding: 50px 20px;
             }
-            
+
             .page-header {
                 padding-top: 12%;
             }
@@ -294,11 +299,11 @@
             .team-card:nth-child(5n+5) {
                 grid-row-end: span 16;
             }
-            
+
             .page-header {
                 padding-top: 15%;
             }
-            
+
             .page-header-title {
                 font-size: 2.5rem;
             }
@@ -322,11 +327,11 @@
             .team-overlay {
                 padding: 20px;
             }
-            
+
             .page-header {
                 padding-top: 18%;
             }
-            
+
             .page-header-title {
                 font-size: 2.2rem;
             }
@@ -379,11 +384,11 @@
             .team-description {
                 font-size: 0.85rem;
             }
-            
+
             .page-header {
                 padding-top: 22%;
             }
-            
+
             .page-header-title {
                 font-size: 2rem;
             }
@@ -409,12 +414,12 @@
             .team-overlay {
                 padding: 18px;
             }
-            
+
             .page-header {
                 padding-top: 25%;
                 padding-bottom: 30px;
             }
-            
+
             .page-header-title {
                 font-size: 1.8rem;
             }
@@ -467,12 +472,12 @@
                 width: 32px;
                 height: 32px;
             }
-            
+
             .page-header {
                 padding-top: 30%;
                 padding-bottom: 25px;
             }
-            
+
             .page-header-title {
                 font-size: 1.6rem;
             }
@@ -491,11 +496,11 @@
             .team-content {
                 padding: 12px;
             }
-            
+
             .page-header {
                 padding-top: 35%;
             }
-            
+
             .page-header-title {
                 font-size: 1.5rem;
             }
@@ -506,7 +511,7 @@
             .team-card:hover {
                 transform: none;
             }
-            
+
             .team-card:active {
                 transform: translateY(-5px);
             }
@@ -518,7 +523,8 @@
 
     <header class="header">
         <nav class="navbar container">
-                        <a href="index.html" class="logo"><img width="150px" height="150px" src="./assets/images/logo.png" alt=""></a>
+            <a href="index.html" class="logo"><img width="150px" height="150px" src="./assets/images/logo.jpeg"
+                    alt=""></a>
 
             <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
                 <i class="fa-solid fa-bars"></i>
@@ -526,20 +532,11 @@
 
             <ul class="nav-links">
                 <li><a href="study-visa.html">Study Visa</a></li>
-                <li><a href="visit-visa.html">Visit Visa</a></li>
-                <li><a href="privacy-policy.html">Privacy Policy</a></li>
                 <li><a href="blog.html">Blog & Articles</a></li>
-                <li class="nav-item nav-item--dropdown">
-                    <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-                        More
-                        <span class="nav-dropdown-caret" aria-hidden="true"></span>
-                    </button>
-                    <ul class="nav-dropdown" role="menu">
-                        <li><a href="./Teams.html" role="menuitem">Teams</a></li>
-                        <li><a href="./cources.html" role="menuitem">Courses</a></li>
-                        <li><a href="./branches.html" role="menuitem">Branches</a></li>
-                    </ul>
-                </li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="./Teams.html" role="menuitem">Teams</a></li>
+                <li><a href="./cources.html" role="menuitem">Courses</a></li>
+                <li><a href="./branches.html" role="menuitem">Branches</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
                 <li class="mobile-apply-btn-container">
                     <a href="./contact.html#contact-form" class="apply-now-btn mobile-apply-btn">Apply Now</a>
@@ -549,7 +546,6 @@
             <a href="./contact.html#contact-form" class="apply-now-btn desktop-apply-btn">Apply Now</a>
         </nav>
     </header>
-    
     <section class="page-header">
         <div class="page-header-container">
             <h1 class="page-header-title">Our Team</h1>
@@ -557,19 +553,18 @@
     </section>
 
     <section id="team-section">
-               <section class="reusable-page-header">
+        <section class="reusable-page-header">
             <div class="page-header-container">
                 <h1 class="page-header-title">Our Courses</h1>
                 <p class="page-header-subtitle">Prepare for your international education journey...</p>
             </div>
         </section>
-        
+
         <div id="team-grid">
             <!-- Team Member 1 -->
             <div class="team-card">
                 <div class="team-image-container">
-                    <img src="./assets/images/ahsan.webp"
-                        alt="Muhammad Ahsan Aftab" class="team-image">
+                    <img src="./assets/images/ahsan.webp" alt="Muhammad Ahsan Aftab" class="team-image">
                 </div>
                 <div class="team-content">
                     <h3 class="team-name">Muhammad Ahsan Aftab</h3>
@@ -591,8 +586,7 @@
             <!-- Team Member 2 -->
             <div class="team-card">
                 <div class="team-image-container">
-                    <img src="./assets/images/faisal.webp"
-                        alt="Faisal Javaid" class="team-image">
+                    <img src="./assets/images/faisal.webp" alt="Faisal Javaid" class="team-image">
                 </div>
                 <div class="team-content">
                     <h3 class="team-name">Faisal Javaid</h3>
@@ -614,17 +608,16 @@
             <!-- Team Member 3 -->
             <div class="team-card">
                 <div class="team-image-container">
-                    <img src="./assets/images/azhar.webp"
-                        alt="Azhar Fareed" class="team-image">
+                    <img src="./assets/images/azhar.webp" alt="Azhar Fareed" class="team-image">
                 </div>
                 <div class="team-content">
                     <h3 class="team-name">Azhar Fareed</h3>
-                    <p class="team-role">Marketing Director</p>
+                    <p class="team-role">Marketing Manager</p>
                 </div>
                 <div class="team-overlay">
                     <div class="team-info">
                         <h3 class="overlay-name">Azhar Fareed</h3>
-                        <p class="overlay-role">Marketing Director</p>
+                        <p class="overlay-role">Marketing Manager</p>
                         <div class="team-social">
                             <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                             <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
@@ -717,9 +710,10 @@
                 <h2 id="footer-logo">Smart Study Consultants</h2>
                 <p id="footer-description">Your trusted partner for visa consultation and application services.</p>
                 <div id="footer-social-icons">
-                    <a href="https://www.facebook.com/p/Smart-Consultant-61557720181296/"" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                     <a href="https://youtube.com/@smartstudyconsultant?si=80cVrJhEajZP1Bl_" class="social-icon" title="YouTube" style="color: white;"><i
-                            class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/p/Smart-Consultant-61557720181296/"" class=" social-icon"
+                        title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://youtube.com/@smartstudyconsultant?si=80cVrJhEajZP1Bl_" class="social-icon"
+                        title="YouTube" style="color: white;"><i class="fab fa-youtube"></i></a>
                     <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 </div>

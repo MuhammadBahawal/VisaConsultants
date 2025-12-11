@@ -7,35 +7,9 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "course_enrollment";
+// Use centralized database configuration
+require_once '../includes/db.php';
 
-$conn = new mysqli($servername, $username, $password);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Select database (create if doesn't exist)
-$conn->query("CREATE DATABASE IF NOT EXISTS $dbname");
-$conn->select_db($dbname);
-
-// Create table if doesn't exist
-$createTable = "CREATE TABLE IF NOT EXISTS enrollments (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
-    city VARCHAR(50),
-    nationality VARCHAR(50),
-    course VARCHAR(100) NOT NULL,
-    course_type VARCHAR(50) NOT NULL,
-    delivery_mode VARCHAR(20) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)";
-$conn->query($createTable);
 
 // Set headers for Excel download
 header('Content-Type: application/vnd.ms-excel');
@@ -57,6 +31,7 @@ echo '<th>Nationality</th>';
 echo '<th>Course</th>';
 echo '<th>Course Type</th>';
 echo '<th>Delivery Mode</th>';
+echo '<th>Document</th>';
 echo '<th>Created At</th>';
 echo '</tr>';
 
@@ -76,6 +51,7 @@ if ($result->num_rows > 0) {
         echo '<td>' . htmlspecialchars($row['course']) . '</td>';
         echo '<td>' . htmlspecialchars($row['course_type']) . '</td>';
         echo '<td>' . htmlspecialchars($row['delivery_mode']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['document_filename'] ?: 'N/A') . '</td>';
         echo '<td>' . htmlspecialchars($row['created_at']) . '</td>';
         echo '</tr>';
     }

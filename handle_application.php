@@ -51,12 +51,9 @@ if (empty($first_name) || empty($last_name) || empty($date_of_birth) || empty($g
 }
 
 // Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "visa_consultants";
+// Use centralized database configuration
+require_once 'includes/db.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     echo json_encode(['success' => false, 'message' => 'Database connection failed.']);
