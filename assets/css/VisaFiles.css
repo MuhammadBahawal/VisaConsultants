@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -16,7 +16,7 @@
 }
 
 .study-visa-container {
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -28,7 +28,7 @@
     direction: rtl;
 }
 
-.study-visa-container.reverse > * {
+.study-visa-container.reverse>* {
     direction: ltr;
 }
 
@@ -275,6 +275,3 @@
         padding: 12px 20px;
     }
 }
-
-
-
